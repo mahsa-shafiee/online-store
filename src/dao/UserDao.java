@@ -12,14 +12,14 @@ public class UserDao {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/online-store", "root", null);
             return connection;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.toString());
         }
         return null;
     }
 
-    public void insert(User user) {
+    public void insert(User user) throws Exception {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_name,password" +
@@ -37,7 +37,8 @@ public class UserDao {
             connection.close();
             System.out.println("Successfully Registered.");
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred " + e);
+            System.out.print("SQL exception occurred : ");
+            throw e;
         }
     }
 
@@ -73,7 +74,7 @@ public class UserDao {
                 address.setState(resultSet.getString(10));
                 address.setCity(resultSet.getString(11));
                 address.setStreet(resultSet.getString(12));
-                address.setPostalCode(resultSet.getInt(13));
+                address.setPostalCode(resultSet.getLong(13));
                 users[index] = user;
                 index++;
             }
