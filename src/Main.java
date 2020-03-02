@@ -1,6 +1,8 @@
 import dao.*;
 import dto.*;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -41,7 +43,7 @@ public class Main {
                                 for (User user : users) {
                                     if (user != null) {
                                         System.out.println("Hi " + ANSI_YELLOW + user.getFirstName() + ANSI_RESET + "!");
-                                        menu();
+                                        menu(user);
                                     } else
                                         System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
                                 }
@@ -70,7 +72,7 @@ public class Main {
                                 userDao = new UserDao();
                                 address.setId(addressDao.getId(address));
                                 userDao.insert(user);
-                                menu();
+                                menu(user);
                         }
                         break;
                     case 2:
@@ -170,18 +172,111 @@ public class Main {
         }
     }
 
-    public static void menu() {
-        System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
-                "\n1)View Product Categories 2)View shopping cart 3)Sign out of account");
-        Scanner scanner = new Scanner(System.in);
-        int choice = scanner.nextInt();
-        switch (choice) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
+    public static void menu(User user) throws Exception {
+        outer:
+        while (true) {
+            try {
+                System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
+                        "\n1)View Product Categories 2)View shopping cart 3)Sign out of account");
+                Scanner scanner = new Scanner(System.in);
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case 1:
+                        CategoryDao categoryDao = new CategoryDao();
+                        categoryDao.showAll();
+                        System.out.println("\nEnter the category you want:");
+                        scanner.nextLine();
+                        String categoryName = scanner.nextLine();
+                        ItemDao itemDao = new ItemDao();
+                        Item[] itemsOfCategory = itemDao.showItemsOfCategory(categoryDao.getId(categoryName));
+                        int itemNumber = 1;
+                        System.out.println(BLUE_BOLD + categoryName.toUpperCase() + ":" + ANSI_RESET);
+                        for (Item item : itemsOfCategory) {
+                            if (item != null) {
+                                item.getCategory().setName(categoryName);
+                                System.out.println(BLACK_BOLD + itemNumber + ") " + item.getName() + ANSI_RESET);
+                                itemNumber++;
+                            }
+                        }
+                        if (itemsOfCategory[0] == null)
+                            break;
+                        System.out.println("Enter the number of product you want to see in detail:");
+                        itemNumber = scanner.nextInt();
+                        System.out.println(itemsOfCategory[itemNumber - 1].toString());
+                        System.out.println(BLACK_BOLD + "Would you like to add this product to your shopping cart?"
+                                + ANSI_RESET + "\n(Help: enter Y or N)");
+                        String answer = scanner.next();
+                        switch (answer) {
+                            case "Y":
+                                ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
+                                shoppingCartDao.search(user);
+                                if (user.getShoppingcart().getItems().size() == 5) {
+                                    System.out.println(ANSI_RED + "Sorry ,Your cart is full\n" +
+                                            "You have to reduce the items or complete your purchase." + ANSI_RESET);
+                                    break;
+                                }
+                                ShoppingCart shoppingCart = new ShoppingCart();
+                                shoppingCart.setItem(itemsOfCategory[itemNumber - 1]);
+                                shoppingCart.setUser(user);
+                                shoppingCartDao.insert(shoppingCart);
+                                itemDao.setStock(itemsOfCategory[itemNumber - 1].getStock() - 1, itemsOfCategory[itemNumber - 1]);
+                                break;
+                            case "N":
+                                break;
+                        }
+                        break;
+                    case 2:
+                        ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
+                        shoppingCartDao.search(user);
+                        List<Item> items = user.getShoppingcart().getItems();
+                        HashSet<Item> itemHashSet = new HashSet<>();
+                        int number = 1;
+                        long totalPrice = 0;
+                        for (Item item : items) {
+                            int count = 0;
+                            for (Item item1 : items) {
+                                if (item.equals(item1))
+                                    count++;
+                            }
+                            totalPrice += item.getPrice();
+                            user.getShoppingcart().setTotalPrice(totalPrice);
+                            if (!itemHashSet.contains(item)) {
+                                System.out.println(BLUE_BOLD + "number " + number + ":\n" + ANSI_RESET + item.toString());
+                                System.out.println("count=" + count);
+                                System.out.println("if you want to delete this item (one of them) from your cart enter" +
+                                        BLACK_BOLD + " del " + item.getName() + ANSI_RESET);
+                                number++;
+                            }
+                            itemHashSet.add(item);
+                        }
+                        System.out.println(BLUE_BOLD + "Total Price= " + user.getShoppingcart().getTotalPrice() + " Rials" + ANSI_RESET);
+                        System.out.println("(If you don't want to delete an item, Press enter.)");
+                        scanner.nextLine();
+                        answer = scanner.nextLine();
+                        if (answer == null || answer.length() == 0)
+                            break;
+                        if (!answer.contains("del ")) {
+                            System.out.println(ANSI_RED + "Invalid!" + ANSI_RESET);
+                            break;
+                        }
+                        String[] splitAnswer = answer.split("del ");
+                        itemDao = new ItemDao();
+                        List<Item> search = itemDao.search(itemDao.getId(splitAnswer[1]));
+                        if (search != null) {
+                            for (Item item : search) {
+                                shoppingCartDao.delete(itemDao.getId(splitAnswer[1]));
+                                itemDao.setStock(item.getStock() + 1, item);
+                            }
+                        } else {
+                            System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
+                        }
+                        break;
+                    case 3:
+                        break outer;
+                }
+            } catch (Exception e) {
+                throw e;
+            }
         }
     }
 }

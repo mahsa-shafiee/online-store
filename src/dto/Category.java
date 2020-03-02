@@ -8,7 +8,10 @@ public class Category {
     private HashSet<Item> items;
     private Admin admin;
 
-    public Category(int id, String name,  Admin admin) {
+    public Category() {
+    }
+
+    public Category(int id, String name, Admin admin) {
         this.id = id;
         this.name = name;
         this.admin = admin;

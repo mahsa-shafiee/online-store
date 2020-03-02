@@ -37,7 +37,6 @@ public class AdminDao {
             preparedStatement.close();
             connection.close();
             return admins;
-
         } catch (SQLException e) {
             System.out.println("SQL exception occurred " + e);
         }

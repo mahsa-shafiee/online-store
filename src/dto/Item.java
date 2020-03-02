@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Objects;
+
 public class Item {
     private int id;
     private Category category;
@@ -8,6 +10,33 @@ public class Item {
     private long price;
     private int stock;
     private Admin admin;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        Item item = (Item) o;
+        return getId() == item.getId();
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "category=" + category.getName() +
+                "\nname='" + name + '\'' +
+                "\ndescription='\n" + description + '\'' +
+                "\nprice=" + price + " Rials" +
+                "\nstock=" + stock;
+    }
+
+    public Item() {
+    }
 
     public Item(String name, String description, long price, int stock, Admin admin) {
         this.name = name;
