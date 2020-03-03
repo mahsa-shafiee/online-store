@@ -87,4 +87,23 @@ public class UserDao {
         }
         return null;
     }
+
+    public int getId(User user) throws Exception {
+        try {
+            Connection connection = UserDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM users WHERE user_name=?");
+            preparedStatement.setString(1, user.getUserName());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                return id;
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.print("SQL exception occurred : ");
+            throw e;
+        }
+        return -1;
+    }
 }

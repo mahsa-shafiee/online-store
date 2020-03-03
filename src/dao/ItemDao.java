@@ -38,10 +38,10 @@ public class ItemDao {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM item WHERE name=?");
             preparedStatement.setString(1, name);
-            preparedStatement.executeUpdate();
+            int rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Deleted successfully.");
+            System.out.println("Deleted successfully.(" + rowAffected + " Rows Affected)");
         } catch (SQLException e) {
             System.out.print("SQL exception occurred : ");
             throw e;
@@ -71,16 +71,14 @@ public class ItemDao {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM item where category_id=?");
             preparedStatement.setInt(1, category_id);
             ResultSet resultSet = preparedStatement.executeQuery();
-            Item[] items = new Item[1];
+            Item[] items = new Item[0];
             int index = 0;
             while (resultSet.next()) {
-                if (index > 0) {
-                    Item[] tmp = new Item[items.length + 1];
-                    for (int i = 0; i < items.length; i++)
-                        if (tmp[i] == null)
-                            tmp[i] = items[i];
-                    items = tmp;
-                }
+                Item[] tmp = new Item[items.length + 1];
+                for (int i = 0; i < items.length; i++)
+                    if (tmp[i] == null)
+                        tmp[i] = items[i];
+                items = tmp;
                 Item item = new Item();
                 item.setId(resultSet.getInt(1));
                 item.setName(resultSet.getString(2));
@@ -158,6 +156,25 @@ public class ItemDao {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM item WHERE name=?");
             preparedStatement.setString(1, name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                return id;
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.print("SQL exception occurred : ");
+            throw e;
+        }
+        return -1;
+    }
+
+    public int getStock(Item item) throws Exception {
+        try {
+            Connection connection = UserDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT stock FROM item WHERE name=?");
+            preparedStatement.setString(1, item.getName());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt(1);

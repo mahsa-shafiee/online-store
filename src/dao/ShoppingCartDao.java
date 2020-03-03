@@ -52,7 +52,7 @@ public class ShoppingCartDao {
         }
     }
 
-    public void delete(int item_id) throws Exception {
+    public void deleteRow(int item_id) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM shopping_cart WHERE item_id=? LIMIT 1");
@@ -67,4 +67,36 @@ public class ShoppingCartDao {
         }
     }
 
+    public void deleteCartOfUser(int user_id) throws Exception {
+        try {
+            Connection connection = UserDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM shopping_cart WHERE users_id=?");
+            preparedStatement.setInt(1, user_id);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.print("SQL exception occurred : ");
+            throw e;
+        }
+    }
+
+    public int getId(int user_id) throws Exception {
+        try {
+            Connection connection = UserDao.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM shopping_cart WHERE users_id=?");
+            preparedStatement.setInt(1, user_id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt(1);
+                return id;
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (SQLException e) {
+            System.out.print("SQL exception occurred : ");
+            throw e;
+        }
+        return -1;
+    }
 }

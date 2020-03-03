@@ -3,7 +3,9 @@ import dto.*;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+
 
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
@@ -17,8 +19,9 @@ public class Main {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final String BLACK_BOLD = "\033[1;30m";
     public static final String BLUE_BOLD = "\033[1;34m";
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-
+    public static final String GREEN_BOLD = "\033[1;32m";
+    public static boolean exit = false;
+    public static boolean signout = false;
 
     public static void main(String[] args) {
         while (true) {
@@ -29,145 +32,195 @@ public class Main {
                 int role = scanner.nextInt();
                 switch (role) {
                     case 1:
-                        System.out.println("1)Login 2)Register \n(If you already have an account, select Login.)");
-                        int userChoice = scanner.nextInt();
-                        switch (userChoice) {
-                            case 1:
-                                System.out.println(BLACK_BOLD + "Account Login:" + ANSI_RESET);
-                                System.out.println("Enter your user name:");
-                                String userName = scanner.next();
-                                System.out.println("Enter your password:");
-                                String password = scanner.next();
-                                UserDao userDao = new UserDao();
-                                User[] users = userDao.search(userName, password);
-                                for (User user : users) {
-                                    if (user != null) {
-                                        System.out.println("Hi " + ANSI_YELLOW + user.getFirstName() + ANSI_RESET + "!");
-                                        menu(user);
-                                    } else
-                                        System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
-                                }
-                                break;
-                            case 2:
-                                System.out.println(BLACK_BOLD + "Account Registration:" + ANSI_RESET);
-                                System.out.println("First name:");
-                                String firstName = scanner.next();
-                                System.out.println("Last name:");
-                                String lastName = scanner.next();
-                                System.out.println("Mobile number:");
-                                String mobileNumber = scanner.next();
-                                System.out.println("Email address:");
-                                String emailAdress = scanner.next();
-                                System.out.println("Home address:(state,city,street,postal_code)");
-                                String[] homeAddress = scanner.next().split(",");
-                                Address address = new Address(homeAddress[0], homeAddress[1], homeAddress[2],
-                                        Long.parseLong(homeAddress[3]));
-                                AddressDao addressDao = new AddressDao();
-                                addressDao.insert(address);
-                                System.out.println("Choose user name:");
-                                userName = scanner.next();
-                                System.out.println("Choose password:");
-                                password = scanner.next();
-                                User user = new User(userName, password, firstName, lastName, mobileNumber, emailAdress, address);
-                                userDao = new UserDao();
-                                address.setId(addressDao.getId(address));
-                                userDao.insert(user);
-                                menu(user);
-                        }
-                        break;
-                    case 2:
-                        System.out.println("enter name:");//name=0
-                        String name = scanner.next();
-                        System.out.println("enter password:");//password=0
-                        String password = scanner.next();
-                        AdminDao adminDao = new AdminDao();
-                        Admin[] admins = adminDao.search(name, password);
-                        for (Admin admin : admins) {
-                            if (admin != null) {
-                                while (true) {
-                                    System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
-                                            "\n1)Edit categories 2)Edit products 3)exit");
-                                    int choice = scanner.nextInt();
-                                    switch (choice) {
-                                        case 1:
-                                            System.out.println(
-                                                    "1)Add new category 2)Rename existing category 3)Delete existing category");
-                                            choice = scanner.nextInt();
-                                            switch (choice) {
-                                                case 1:
-                                                    CategoryDao categoryDao = new CategoryDao();
-                                                    System.out.println("category name:");
-                                                    scanner.nextLine();
-                                                    name = scanner.nextLine();
-                                                    Category category = new Category(name, admin);
-                                                    admin.setId(adminDao.getId(admin));
-                                                    categoryDao.insert(category);
-                                                    break;
-                                                case 2:
-                                                    categoryDao = new CategoryDao();
-                                                    categoryDao.showAll();
-                                                    System.out.println("Enter in this way " + BLACK_BOLD +
-                                                            "old name,new name" + ANSI_RESET + " to rename:");
-                                                    scanner.nextLine();
-                                                    String[] splitName = scanner.nextLine().split(",");
-                                                    categoryDao.rename(splitName[0], splitName[1]);
-                                                    break;
-                                                case 3:
-                                                    categoryDao = new CategoryDao();
-                                                    categoryDao.showAll();
-                                                    System.out.println("\nEnter name of the category you want to delete:");
-                                                    scanner.nextLine();
-                                                    name = scanner.nextLine();
-                                                    categoryDao.delete(name);
-                                                    break;
-                                            }
-                                            break;
-                                        case 2:
-                                            System.out.println("1)Add new product 2)delete existing product");
-                                            choice = scanner.nextInt();
-                                            switch (choice) {
-                                                case 1:
-                                                    CategoryDao categoryDao = new CategoryDao();
-                                                    categoryDao.showAll();
-                                                    System.out.println("Enter the category of the product you want to add:");
-                                                    scanner.nextLine();
-                                                    String categoryName = scanner.nextLine();
-                                                    ItemDao itemDao = new ItemDao();
-                                                    System.out.println("Enter information of product in this way " + BLACK_BOLD +
-                                                            "name,description,price,stock" + ANSI_RESET);
-                                                    String[] splitInformation = scanner.nextLine().split(",");
-                                                    Item item = new Item(splitInformation[0], splitInformation[1],
-                                                            Long.parseLong(splitInformation[2]),
-                                                            Integer.parseInt(splitInformation[3]), admin);
-                                                    Category category = new Category(categoryDao.getId(categoryName),
-                                                            categoryName, admin);
-                                                    item.setCategory(category);
-                                                    admin.setId(adminDao.getId(admin));
-                                                    itemDao.insert(item);
-                                                    break;
-                                                case 2:
-                                                    itemDao = new ItemDao();
-                                                    itemDao.showAll();
-                                                    System.out.println("\nEnter the name of the product you want to delete:");
-                                                    scanner.nextLine();
-                                                    name = scanner.nextLine();
-                                                    itemDao.delete(name);
-                                                    break;
-                                            }
-                                            break;
-                                        case 3:
+                        while (true) {
+                            System.out.println("1)Login 2)Register \n(If you already have an account, select Login.)");
+                            String userChoice = scanner.next();
+                            switch (userChoice) {
+                                case "1":
+                                    while (true) {
+                                        if (exit)
                                             return;
+                                        if (signout) {
+                                            signout = false;
+                                            break;
+                                        }
+                                        System.out.println(BLACK_BOLD + "Account Login:" + ANSI_RESET);
+                                        System.out.println("Enter your user name:");
+                                        String userName = scanner.next();
+                                        System.out.println("Enter your password:");
+                                        String password = scanner.next();
+                                        UserDao userDao = new UserDao();
+                                        User[] users = userDao.search(userName, password);
+                                        for (User user : users) {
+                                            if (user != null) {
+                                                System.out.println("Hi " + ANSI_YELLOW + user.getFirstName() + ANSI_RESET + "!");
+                                                menu(user);
+                                            } else
+                                                System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
+                                        }
                                     }
-                                }
-                            } else
-                                System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
+                                case "2":
+                                    while (true) {
+                                        try {
+                                            if (exit)
+                                                return;
+                                            if (signout) {
+                                                signout = false;
+                                                break;
+                                            }
+                                            System.out.println(BLACK_BOLD + "Account Registration:" + ANSI_RESET);
+                                            System.out.println("First name:");
+                                            String firstName = scanner.next();
+                                            System.out.println("Last name:");
+                                            String lastName = scanner.next();
+                                            System.out.println("Mobile number:");
+                                            String mobileNumber = scanner.next();
+                                            for (int i = 0; i < mobileNumber.length(); i++) {
+                                                if (!Character.isDigit(mobileNumber.charAt(i)) || mobileNumber.length() != 11)
+                                                    throw new Exception();
+                                            }
+                                            System.out.println("Email address:");
+                                            String emailAddress = scanner.next();
+                                            if (!emailAddress.contains("@"))
+                                                throw new Exception();
+                                            System.out.println("Home address:(state,city,street,postal_code)");
+                                            String[] homeAddress = scanner.next().split(",");
+                                            if (homeAddress[3].length() != 10)
+                                                throw new Exception();
+                                            Address address = new Address(homeAddress[0], homeAddress[1], homeAddress[2],
+                                                    Long.parseLong(homeAddress[3]));
+                                            AddressDao addressDao = new AddressDao();
+                                            addressDao.insert(address);
+                                            System.out.println("Choose user name:");
+                                            String userName = scanner.next();
+                                            System.out.println("Choose password:");
+                                            String password = scanner.next();
+                                            User user = new User(userName, password, firstName, lastName, mobileNumber, emailAddress, address);
+                                            UserDao userDao = new UserDao();
+                                            address.setId(addressDao.getId(address));
+                                            userDao.insert(user);
+                                            menu(user);
+                                        } catch (Exception e) {
+                                            System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                            continue;
+                                        }
+                                    }
+                                default:
+                                    System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                            }
                         }
-                        break;
+                    case 2:
+                        while (true) {
+                            System.out.println("enter name:");//name=0
+                            String name = scanner.next();
+                            System.out.println("enter password:");//password=0
+                            String password = scanner.next();
+                            AdminDao adminDao = new AdminDao();
+                            Admin[] admins = adminDao.search(name, password);
+                            for (Admin admin : admins) {
+                                if (admin != null) {
+                                    while (true) {
+                                        System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
+                                                "\n1)Edit categories 2)Edit products 3)exit");
+                                        String choice = scanner.next();
+                                        inner:
+                                        switch (choice) {
+                                            case "1":
+                                                System.out.println(
+                                                        "1)Add new category 2)Rename existing category 3)Delete existing category");
+                                                choice = scanner.next();
+                                                switch (choice) {
+                                                    case "1":
+                                                        CategoryDao categoryDao = new CategoryDao();
+                                                        System.out.println("category name:");
+                                                        scanner.nextLine();
+                                                        name = scanner.nextLine();
+                                                        Category category = new Category(name, admin);
+                                                        admin.setId(adminDao.getId(admin));
+                                                        categoryDao.insert(category);
+                                                        break;
+                                                    case "2":
+                                                        categoryDao = new CategoryDao();
+                                                        categoryDao.showAll();
+                                                        System.out.println("Enter in this way " + BLACK_BOLD +
+                                                                "old name,new name" + ANSI_RESET + " to rename:");
+                                                        scanner.nextLine();
+                                                        try {
+                                                            String[] splitName = scanner.nextLine().split(",");
+                                                            categoryDao.rename(splitName[0], splitName[1]);
+                                                        } catch (ArrayIndexOutOfBoundsException e) {
+                                                            System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                                        }
+                                                        break;
+                                                    case "3":
+                                                        categoryDao = new CategoryDao();
+                                                        categoryDao.showAll();
+                                                        System.out.println("\nEnter name of the category you want to delete:");
+                                                        scanner.nextLine();
+                                                        name = scanner.nextLine();
+                                                        categoryDao.delete(name);
+                                                        break;
+                                                    default:
+                                                        System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                                        continue;
+                                                }
+                                                continue;
+                                            case "2":
+                                                System.out.println("1)Add new product 2)delete existing product");
+                                                choice = scanner.next();
+                                                switch (choice) {
+                                                    case "1":
+                                                        CategoryDao categoryDao = new CategoryDao();
+                                                        categoryDao.showAll();
+                                                        System.out.println("Enter the category of the product you want to add:");
+                                                        scanner.nextLine();
+                                                        String categoryName = scanner.nextLine();
+                                                        ItemDao itemDao = new ItemDao();
+                                                        System.out.println("Enter information of product in this way " + BLACK_BOLD +
+                                                                "name,description,price,stock" + ANSI_RESET);
+                                                        try {
+                                                            String[] splitInformation = scanner.nextLine().split(",");
+                                                            Item item = new Item(splitInformation[0], splitInformation[1],
+                                                                    Long.parseLong(splitInformation[2]),
+                                                                    Integer.parseInt(splitInformation[3]), admin);
+                                                            Category category = new Category(categoryDao.getId(categoryName),
+                                                                    categoryName, admin);
+                                                            item.setCategory(category);
+                                                            admin.setId(adminDao.getId(admin));
+                                                            itemDao.insert(item);
+                                                        } catch (ArrayIndexOutOfBoundsException e) {
+                                                            System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                                        }
+                                                        break;
+                                                    case "2":
+                                                        itemDao = new ItemDao();
+                                                        itemDao.showAll();
+                                                        System.out.println("\nEnter the name of the product you want to delete:");
+                                                        scanner.nextLine();
+                                                        name = scanner.nextLine();
+                                                        itemDao.delete(name);
+                                                        break;
+                                                    default:
+                                                        System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                                        break;
+                                                }
+                                                break;
+                                            case "3":
+                                                return;
+                                            default:
+                                                System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                                                break;
+                                        }
+                                    }
+                                } else
+                                    System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
+                            }
+                        }
                     default:
-                        throw new Exception("<Invalid Input, Try again.>");
+                        throw new Exception();
                 }
             } catch (Exception e) {
-                System.out.println(e.toString());
+                System.out.println(ANSI_RED + e.toString() + " <Invalid Input, Try again.>" + ANSI_RESET);
             }
         }
     }
@@ -177,18 +230,26 @@ public class Main {
         while (true) {
             try {
                 System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
-                        "\n1)View Product Categories 2)View shopping cart 3)Sign out of account");
+                        "\n1)View Product Categories 2)View shopping cart 3)View orders 4)Sign out of account 5)exit");
                 Scanner scanner = new Scanner(System.in);
-                int choice = scanner.nextInt();
+                String choice = scanner.next();
                 switch (choice) {
-                    case 1:
+                    case "1":
                         CategoryDao categoryDao = new CategoryDao();
-                        categoryDao.showAll();
+                        HashSet<String> names = categoryDao.showAll();
                         System.out.println("\nEnter the category you want:");
                         scanner.nextLine();
                         String categoryName = scanner.nextLine();
+                        if (!names.contains(categoryName)) {
+                            System.out.println(ANSI_RED + "There is no such category." + ANSI_RESET);
+                            continue;
+                        }
                         ItemDao itemDao = new ItemDao();
                         Item[] itemsOfCategory = itemDao.showItemsOfCategory(categoryDao.getId(categoryName));
+                        if (itemsOfCategory.length == 0) {
+                            System.out.println(ANSI_RED + "This category is empty." + ANSI_RESET);
+                            continue;
+                        }
                         int itemNumber = 1;
                         System.out.println(BLUE_BOLD + categoryName.toUpperCase() + ":" + ANSI_RESET);
                         for (Item item : itemsOfCategory) {
@@ -201,8 +262,13 @@ public class Main {
                         if (itemsOfCategory[0] == null)
                             break;
                         System.out.println("Enter the number of product you want to see in detail:");
-                        itemNumber = scanner.nextInt();
-                        System.out.println(itemsOfCategory[itemNumber - 1].toString());
+                        try {
+                            itemNumber = scanner.nextInt();
+                            System.out.println(itemsOfCategory[itemNumber - 1].toString());
+                        } catch (Exception e) {
+                            System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                            continue;
+                        }
                         System.out.println(BLACK_BOLD + "Would you like to add this product to your shopping cart?"
                                 + ANSI_RESET + "\n(Help: enter Y or N)");
                         String answer = scanner.next();
@@ -210,7 +276,7 @@ public class Main {
                             case "Y":
                                 ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
                                 shoppingCartDao.search(user);
-                                if (user.getShoppingcart().getItems().size() == 5) {
+                                if (user.getShoppingcart() != null && user.getShoppingcart().getItems().size() == 5) {
                                     System.out.println(ANSI_RED + "Sorry ,Your cart is full\n" +
                                             "You have to reduce the items or complete your purchase." + ANSI_RESET);
                                     break;
@@ -219,15 +285,21 @@ public class Main {
                                 shoppingCart.setItem(itemsOfCategory[itemNumber - 1]);
                                 shoppingCart.setUser(user);
                                 shoppingCartDao.insert(shoppingCart);
-                                itemDao.setStock(itemsOfCategory[itemNumber - 1].getStock() - 1, itemsOfCategory[itemNumber - 1]);
                                 break;
                             case "N":
                                 break;
+                            default:
+                                System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
                         }
                         break;
-                    case 2:
+                    case "2":
                         ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
+                        user.setShoppingcart(null);
                         shoppingCartDao.search(user);
+                        if (user.getShoppingcart() == null || user.getShoppingcart().getItems() == null) {
+                            System.out.println(BLACK_BOLD + "Your shopping cart is empty :(" + ANSI_RESET);
+                            break;
+                        }
                         List<Item> items = user.getShoppingcart().getItems();
                         HashSet<Item> itemHashSet = new HashSet<>();
                         int number = 1;
@@ -250,12 +322,34 @@ public class Main {
                             itemHashSet.add(item);
                         }
                         System.out.println(BLUE_BOLD + "Total Price= " + user.getShoppingcart().getTotalPrice() + " Rials" + ANSI_RESET);
-                        System.out.println("(If you don't want to delete an item, Press enter.)");
+                        System.out.println("Enter " + BLACK_BOLD + "order" + ANSI_RESET + " to complete your purchase" +
+                                "\n(If you don't want to delete an item or complete your purchase, Press enter.)");
                         scanner.nextLine();
                         answer = scanner.nextLine();
                         if (answer == null || answer.length() == 0)
                             break;
-                        if (!answer.contains("del ")) {
+                        if (Objects.equals(answer, "order")) {
+                            OrderDao orderDao = new OrderDao();
+                            UserDao userDao = new UserDao();
+                            shoppingCartDao.search(user);
+                            user.getShoppingcart().setId(shoppingCartDao.getId(userDao.getId(user)));
+                            long millis = System.currentTimeMillis();
+                            java.sql.Date date = new java.sql.Date(millis);
+                            for (Item item : user.getShoppingcart().getItems()) {
+                                shoppingCartDao.search(user);
+                                Order order = new Order(date, user, item);
+                                orderDao.insert(order);
+                            }
+                            itemDao = new ItemDao();
+                            for (Item item : user.getShoppingcart().getItems()) {
+                                itemDao.setStock(itemDao.getStock(item) - 1, item);
+                            }
+                            shoppingCartDao.deleteCartOfUser(userDao.getId(user));
+                            System.out.println("Purchased successfully.");
+                            user.setShoppingcart(new ShoppingCart());
+                            break;
+                        }
+                        if (!answer.contains("del ") && !Objects.equals(answer, "order")) {
                             System.out.println(ANSI_RED + "Invalid!" + ANSI_RESET);
                             break;
                         }
@@ -263,19 +357,32 @@ public class Main {
                         itemDao = new ItemDao();
                         List<Item> search = itemDao.search(itemDao.getId(splitAnswer[1]));
                         if (search != null) {
-                            for (Item item : search) {
-                                shoppingCartDao.delete(itemDao.getId(splitAnswer[1]));
-                                itemDao.setStock(item.getStock() + 1, item);
-                            }
+                            shoppingCartDao.deleteRow(itemDao.getId(splitAnswer[1]));
                         } else {
                             System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
                         }
                         break;
-                    case 3:
+                    case "3":
+                        OrderDao orderDao = new OrderDao();
+                        List<Order> orders = orderDao.showOrdersOfuser(new UserDao().getId(user));
+                        number = 1;
+                        for (Order order : orders) {
+                            System.out.println(BLUE_BOLD + "NUMBER " + number + " :\n" + ANSI_RESET + order.toString());
+                            number++;
+                        }
+                        break;
+                    case "4":
+                        signout = false;
                         break outer;
+                    case "5":
+                        exit = true;
+                        break outer;
+                    default:
+                        System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
+                        break;
                 }
             } catch (Exception e) {
-                throw e;
+                throw new Exception();
             }
         }
     }

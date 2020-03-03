@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
 
 public class CategoryDao {
     public void insert(Category category) throws Exception {
@@ -24,18 +25,20 @@ public class CategoryDao {
         }
     }
 
-
-    public void showAll() throws Exception {
+    public HashSet<String> showAll() throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM category");
             ResultSet resultSet = preparedStatement.executeQuery();
+            HashSet<String> categoryNames = new HashSet<>();
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
                 System.out.println(name);
+                categoryNames.add(name);
             }
             preparedStatement.close();
             connection.close();
+            return categoryNames;
         } catch (SQLException e) {
             System.out.print("SQL exception occurred : ");
             throw e;
@@ -48,10 +51,10 @@ public class CategoryDao {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE category SET name=? WHERE name=?;");
             preparedStatement.setString(1, newName);
             preparedStatement.setString(2, oldName);
-            preparedStatement.executeUpdate();
+            int rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Renamed successfully.");
+            System.out.println("Renamed successfully.(" + rowAffected + " Rows Affected)");
         } catch (SQLException e) {
             System.out.print("SQL exception occurred : ");
             throw e;
@@ -61,12 +64,12 @@ public class CategoryDao {
     public void delete(String name) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM category c WHERE c.name=?");
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM category WHERE name=?");
             preparedStatement.setString(1, name);
-            preparedStatement.executeUpdate();
+            int rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Deleted successfully.");
+            System.out.println("Deleted successfully.(" + rowAffected + " Rows Affected)");
         } catch (SQLException e) {
             System.out.print("SQL exception occurred : ");
             throw e;
