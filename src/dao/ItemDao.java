@@ -151,7 +151,7 @@ public class ItemDao {
         }
     }
 
-    public int getId(String name) throws Exception {
+    public int getIdFromDataBase(String name) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM item WHERE name=?");

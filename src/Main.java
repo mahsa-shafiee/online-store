@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 public class Main {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -20,8 +19,8 @@ public class Main {
     public static final String BLACK_BOLD = "\033[1;30m";
     public static final String BLUE_BOLD = "\033[1;34m";
     public static final String GREEN_BOLD = "\033[1;32m";
-    public static boolean exit = false;
-    public static boolean signout = false;
+    public static boolean EXIT = false;
+    public static boolean SIGNOUT = false;
 
     public static void main(String[] args) {
         while (true) {
@@ -32,17 +31,18 @@ public class Main {
                 int role = scanner.nextInt();
                 switch (role) {
                     case 1:
+                        outer:
                         while (true) {
                             System.out.println("1)Login 2)Register \n(If you already have an account, select Login.)");
                             String userChoice = scanner.next();
                             switch (userChoice) {
                                 case "1":
                                     while (true) {
-                                        if (exit)
+                                        if (EXIT)
                                             return;
-                                        if (signout) {
-                                            signout = false;
-                                            break;
+                                        if (SIGNOUT) {
+                                            SIGNOUT = false;
+                                            continue outer;
                                         }
                                         System.out.println(BLACK_BOLD + "Account Login:" + ANSI_RESET);
                                         System.out.println("Enter your user name:");
@@ -62,11 +62,11 @@ public class Main {
                                 case "2":
                                     while (true) {
                                         try {
-                                            if (exit)
+                                            if (EXIT)
                                                 return;
-                                            if (signout) {
-                                                signout = false;
-                                                break;
+                                            if (SIGNOUT) {
+                                                SIGNOUT = false;
+                                                continue outer;
                                             }
                                             System.out.println(BLACK_BOLD + "Account Registration:" + ANSI_RESET);
                                             System.out.println("First name:");
@@ -97,7 +97,7 @@ public class Main {
                                             String password = scanner.next();
                                             User user = new User(userName, password, firstName, lastName, mobileNumber, emailAddress, address);
                                             UserDao userDao = new UserDao();
-                                            address.setId(addressDao.getId(address));
+                                            address.setId(addressDao.getIdFromDataBase(address));
                                             userDao.insert(user);
                                             menu(user);
                                         } catch (Exception e) {
@@ -123,7 +123,6 @@ public class Main {
                                         System.out.println(GREEN_BOLD + "What do you want to do?" + ANSI_RESET +
                                                 "\n1)Edit categories 2)Edit products 3)exit");
                                         String choice = scanner.next();
-                                        inner:
                                         switch (choice) {
                                             case "1":
                                                 System.out.println(
@@ -136,7 +135,7 @@ public class Main {
                                                         scanner.nextLine();
                                                         name = scanner.nextLine();
                                                         Category category = new Category(name, admin);
-                                                        admin.setId(adminDao.getId(admin));
+                                                        admin.setId(adminDao.getIdFromDataBase(admin));
                                                         categoryDao.insert(category);
                                                         break;
                                                     case "2":
@@ -183,10 +182,10 @@ public class Main {
                                                             Item item = new Item(splitInformation[0], splitInformation[1],
                                                                     Long.parseLong(splitInformation[2]),
                                                                     Integer.parseInt(splitInformation[3]), admin);
-                                                            Category category = new Category(categoryDao.getId(categoryName),
+                                                            Category category = new Category(categoryDao.getIdFromDataBase(categoryName),
                                                                     categoryName, admin);
                                                             item.setCategory(category);
-                                                            admin.setId(adminDao.getId(admin));
+                                                            admin.setId(adminDao.getIdFromDataBase(admin));
                                                             itemDao.insert(item);
                                                         } catch (ArrayIndexOutOfBoundsException e) {
                                                             System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);
@@ -245,7 +244,7 @@ public class Main {
                             continue;
                         }
                         ItemDao itemDao = new ItemDao();
-                        Item[] itemsOfCategory = itemDao.showItemsOfCategory(categoryDao.getId(categoryName));
+                        Item[] itemsOfCategory = itemDao.showItemsOfCategory(categoryDao.getIdFromDataBase(categoryName));
                         if (itemsOfCategory.length == 0) {
                             System.out.println(ANSI_RED + "This category is empty." + ANSI_RESET);
                             continue;
@@ -275,7 +274,7 @@ public class Main {
                         switch (answer) {
                             case "Y":
                                 ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
-                                shoppingCartDao.search(user);
+                                shoppingCartDao.setItemsOfCart(user);
                                 if (user.getShoppingcart() != null && user.getShoppingcart().getItems().size() == 5) {
                                     System.out.println(ANSI_RED + "Sorry ,Your cart is full\n" +
                                             "You have to reduce the items or complete your purchase." + ANSI_RESET);
@@ -295,7 +294,7 @@ public class Main {
                     case "2":
                         ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
                         user.setShoppingcart(null);
-                        shoppingCartDao.search(user);
+                        shoppingCartDao.setItemsOfCart(user);
                         if (user.getShoppingcart() == null || user.getShoppingcart().getItems() == null) {
                             System.out.println(BLACK_BOLD + "Your shopping cart is empty :(" + ANSI_RESET);
                             break;
@@ -331,12 +330,12 @@ public class Main {
                         if (Objects.equals(answer, "order")) {
                             OrderDao orderDao = new OrderDao();
                             UserDao userDao = new UserDao();
-                            shoppingCartDao.search(user);
-                            user.getShoppingcart().setId(shoppingCartDao.getId(userDao.getId(user)));
+                            shoppingCartDao.setItemsOfCart(user);
+                            user.getShoppingcart().setId(shoppingCartDao.getIdFromDataBase(userDao.getIdFromDataBase(user)));
                             long millis = System.currentTimeMillis();
                             java.sql.Date date = new java.sql.Date(millis);
                             for (Item item : user.getShoppingcart().getItems()) {
-                                shoppingCartDao.search(user);
+                                shoppingCartDao.setItemsOfCart(user);
                                 Order order = new Order(date, user, item);
                                 orderDao.insert(order);
                             }
@@ -344,7 +343,7 @@ public class Main {
                             for (Item item : user.getShoppingcart().getItems()) {
                                 itemDao.setStock(itemDao.getStock(item) - 1, item);
                             }
-                            shoppingCartDao.deleteCartOfUser(userDao.getId(user));
+                            shoppingCartDao.deleteCartOfUser(userDao.getIdFromDataBase(user));
                             System.out.println("Purchased successfully.");
                             user.setShoppingcart(new ShoppingCart());
                             break;
@@ -355,16 +354,16 @@ public class Main {
                         }
                         String[] splitAnswer = answer.split("del ");
                         itemDao = new ItemDao();
-                        List<Item> search = itemDao.search(itemDao.getId(splitAnswer[1]));
+                        List<Item> search = itemDao.search(itemDao.getIdFromDataBase(splitAnswer[1]));
                         if (search != null) {
-                            shoppingCartDao.deleteRow(itemDao.getId(splitAnswer[1]));
+                            shoppingCartDao.deleteRow(itemDao.getIdFromDataBase(splitAnswer[1]));
                         } else {
                             System.out.println(ANSI_RED + "The information entered is incorrect!" + ANSI_RESET);
                         }
                         break;
                     case "3":
                         OrderDao orderDao = new OrderDao();
-                        List<Order> orders = orderDao.showOrdersOfuser(new UserDao().getId(user));
+                        List<Order> orders = orderDao.showOrdersOfuser(new UserDao().getIdFromDataBase(user));
                         number = 1;
                         for (Order order : orders) {
                             System.out.println(BLUE_BOLD + "NUMBER " + number + " :\n" + ANSI_RESET + order.toString());
@@ -372,10 +371,10 @@ public class Main {
                         }
                         break;
                     case "4":
-                        signout = false;
-                        break outer;
+                        SIGNOUT = true;
+                        return;
                     case "5":
-                        exit = true;
+                        EXIT = true;
                         break outer;
                     default:
                         System.out.println(ANSI_RED + "Invalid input!" + ANSI_RESET);

@@ -26,7 +26,7 @@ public class AddressDao {
         }
     }
 
-    public int getId(Address address) throws Exception {
+    public int getIdFromDataBase(Address address) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM address WHERE state=? and city=? and street=? and postal_code=?");

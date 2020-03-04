@@ -88,7 +88,7 @@ public class UserDao {
         return null;
     }
 
-    public int getId(User user) throws Exception {
+    public int getIdFromDataBase(User user) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM users WHERE user_name=?");

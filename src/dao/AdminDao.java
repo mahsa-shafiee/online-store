@@ -43,7 +43,7 @@ public class AdminDao {
         return null;
     }
 
-    public int getId(Admin admin) throws Exception {
+    public int getIdFromDataBase(Admin admin) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM admin WHERE name=? and password=?");

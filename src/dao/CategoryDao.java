@@ -76,7 +76,7 @@ public class CategoryDao {
         }
     }
 
-    public int getId(String name) throws Exception {
+    public int getIdFromDataBase(String name) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM category WHERE name=?");

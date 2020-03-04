@@ -27,7 +27,7 @@ public class ShoppingCartDao {
         }
     }
 
-    public void search(User user) {
+    public void setItemsOfCart(User user) {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT item_id FROM shopping_cart where users_id=?");
@@ -81,7 +81,7 @@ public class ShoppingCartDao {
         }
     }
 
-    public int getId(int user_id) throws Exception {
+    public int getIdFromDataBase(int user_id) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM shopping_cart WHERE users_id=?");
