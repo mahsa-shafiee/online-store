@@ -65,6 +65,10 @@ public class AdminService {
         itemDao.delete(name);
     }
 
-
+    public List<User> findAllUsers() {
+        List<User> allUsers = Arrays.asList(userDao.search("", "", true));
+        allUsers = allUsers.stream().sorted().collect(Collectors.toList());
+        return allUsers;
+    }
 
 }

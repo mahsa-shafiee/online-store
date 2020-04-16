@@ -21,7 +21,7 @@ public class AdminMenus {
             if (adminService.validateAdmin(adminUserName, adminPassword)) {
                 while (true) {
                     System.out.println(Main.GREEN_BOLD + "What do you want to do?" + Main.ANSI_RESET +
-                            "\n1)Edit categories 2)Edit products 3)exit");
+                            "\n1)Edit categories 2)Edit products 3)View users status report (Sorted by user age) 4)exit");
                     String choice = scanner.next();
                     switch (choice) {
                         case "1":
@@ -60,7 +60,9 @@ public class AdminMenus {
                                     break;
                             }
                             break;
-
+                        case "3":
+                            showUsersStatusReport();
+                            break;
                         case "4":
                             Main.EXIT = true;
                             return;
@@ -150,6 +152,13 @@ public class AdminMenus {
         }
     }
 
-
+    private void showUsersStatusReport() {
+        List<User> allUsers = adminService.findAllUsers();
+        int userNumber = 1;
+        for (User user : allUsers) {
+            System.out.println(userNumber + ") " + user.toString());
+            userNumber++;
+        }
+    }
 
 }
