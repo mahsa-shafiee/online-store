@@ -1,6 +1,8 @@
 package dao;
 
-import dto.*;
+import model.Item;
+import model.ShoppingCart;
+import model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,36 +22,28 @@ public class ShoppingCartDao {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Added successfully.");
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public void setItemsOfCart(User user) {
+    public List<Item> findItems(User user) {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT item_id FROM shopping_cart where users_id=?");
             preparedStatement.setInt(1, user.getId());
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Item> items = new ArrayList<>();
+            List<Item> search = new ArrayList<>();
             while (resultSet.next()) {
                 ItemDao itemDao = new ItemDao();
-                items.addAll(itemDao.search(resultSet.getInt(1)));
-                ShoppingCart shoppingcart;
-                if (user.getShoppingcart() != null)
-                    shoppingcart = user.getShoppingcart();
-                else
-                    shoppingcart = new ShoppingCart();
-                shoppingcart.setItems(items);
-                user.setShoppingcart(shoppingcart);
+                search.add(itemDao.search(resultSet.getInt(1)).get(0));
             }
             preparedStatement.close();
             connection.close();
+            return search;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
         }
+        return null;
     }
 
     public void deleteRow(int item_id) throws Exception {
@@ -60,9 +54,7 @@ public class ShoppingCartDao {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Deleted successfully.");
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
@@ -76,12 +68,11 @@ public class ShoppingCartDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public int getIdFromDataBase(int user_id) throws Exception {
+    public int getIdIfExist(int user_id) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM shopping_cart WHERE users_id=?");
@@ -94,7 +85,6 @@ public class ShoppingCartDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

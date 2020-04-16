@@ -3,13 +3,36 @@
   <component name="ChangeListManager">
     <list default="true" id="0367dddf-8e23-4f5c-936d-533e349e2149" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/AddressDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/AddressDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/AdminDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/AdminDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/CategoryDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/ItemDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/ShoppingCartDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/ShoppingCartDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/Address.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/Admin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/Category.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/Item.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/Order.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/ShoppingCart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dto/User.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/AddressDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AddressDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/AdminDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AdminDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CategoryDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/OrderDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Address.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Admin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Category.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Item.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/Order.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/ShoppingCart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/Main.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,89 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <file leaf-file-name="UserPurchaseMenu.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/view/UserPurchaseMenu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="346" column="45" selection-start-line="346" selection-start-column="45" selection-end-line="346" selection-end-column="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AddressDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dao/OrderDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="714">
-              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Order.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dto/Order.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="697">
-              <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Item.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="CategoryDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ShoppingCartDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dao/ShoppingCartDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ItemDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/dao/ItemDao.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1122">
-              <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
+            <state relative-caret-position="170">
+              <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -122,10 +67,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>user</find>
-      <find>itemsOfC</find>
-      <find>catch</find>
-      <find>inva</find>
       <find>passw</find>
       <find>num</find>
       <find>row</find>
@@ -147,6 +88,15 @@
       <find>exit</find>
       <find>getId</find>
       <find>split</find>
+      <find>5</find>
+      <find>setItemsO</find>
+      <find>updateshopp</find>
+      <find>setitemsof</find>
+      <find>Exi</find>
+      <find>upda</find>
+      <find>empty</find>
+      <find>cart</find>
+      <find>dao</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -155,32 +105,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Address.java" />
-        <option value="$PROJECT_DIR$/src/User.java" />
-        <option value="$PROJECT_DIR$/src/Cart.java" />
-        <option value="$PROJECT_DIR$/src/Category.java" />
-        <option value="$PROJECT_DIR$/src/Item.java" />
-        <option value="$PROJECT_DIR$/src/dto/Cart.java" />
-        <option value="$PROJECT_DIR$/src/dto/shopping_cart.java" />
-        <option value="$PROJECT_DIR$/src/dto/admin.java" />
-        <option value="$PROJECT_DIR$/src/dto/order.java" />
-        <option value="$PROJECT_DIR$/src/dto/User.java" />
-        <option value="$PROJECT_DIR$/src/dto/Address.java" />
-        <option value="$PROJECT_DIR$/src/dao/AddressDao.java" />
-        <option value="$PROJECT_DIR$/src/dto/Admin.java" />
-        <option value="$PROJECT_DIR$/src/dto/Category.java" />
-        <option value="$PROJECT_DIR$/src/dao/AdminDao.java" />
-        <option value="$PROJECT_DIR$/src/dto/Item.java" />
-        <option value="$PROJECT_DIR$/src/dto/ShoppingCart.java" />
-        <option value="$PROJECT_DIR$/src/dao/UserDao.java" />
-        <option value="$PROJECT_DIR$/src/dao/OrderDao.java" />
         <option value="$PROJECT_DIR$/src/dto/Order.java" />
-        <option value="$PROJECT_DIR$/src/dao/ItemDao.java" />
         <option value="$PROJECT_DIR$/src/storeMain.java" />
         <option value="$PROJECT_DIR$/src/dao/CategoryDao.java" />
         <option value="$PROJECT_DIR$/src/stroreMain.java" />
-        <option value="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/services/adminService/CategoryManagement.java" />
+        <option value="$PROJECT_DIR$/src/services/adminService/ProductManagement.java" />
+        <option value="$PROJECT_DIR$/src/services/adminService/AccountLogin.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/ItemPresentation.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/OrderPresentation.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/CategoryPresentation.java" />
+        <option value="$PROJECT_DIR$/src/menus/menusPresntation.java" />
+        <option value="$PROJECT_DIR$/src/menus/menusPresentation.java" />
+        <option value="$PROJECT_DIR$/src/test/Main.java" />
+        <option value="$PROJECT_DIR$/src/menus/adminMenus.java" />
+        <option value="$PROJECT_DIR$/src/menus/MenusPresentation.java" />
+        <option value="$PROJECT_DIR$/src/menus/userMenus.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/AccountLogin.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/ProductPresentation.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/OrderManagement.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/AccountRegistration.java" />
+        <option value="$PROJECT_DIR$/src/dto/User.java" />
+        <option value="$PROJECT_DIR$/src/dto/Address.java" />
+        <option value="$PROJECT_DIR$/src/services/adminService/UsersStatusPresentation.java" />
+        <option value="$PROJECT_DIR$/src/menus/UserMenus.java" />
+        <option value="$PROJECT_DIR$/src/menus/AdminMenus.java" />
+        <option value="$PROJECT_DIR$/src/testOnlineStore/Main.java" />
+        <option value="$PROJECT_DIR$/src/services/userService/ShoppingCartManagement.java" />
+        <option value="$PROJECT_DIR$/src/dto/Item.java" />
+        <option value="$PROJECT_DIR$/src/myCode/services/adminService/ProductManagement.java" />
+        <option value="$PROJECT_DIR$/src/refactoredCode/src/dao/ItemDao.java" />
+        <option value="$PROJECT_DIR$/src/myCode/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/myCode/dto/User.java" />
+        <option value="$PROJECT_DIR$/src/model/User.java" />
+        <option value="$PROJECT_DIR$/src/myCode/menus/AdminMenus.java" />
+        <option value="$PROJECT_DIR$/src/myCode/services/adminService/UsersStatusPresentation.java" />
+        <option value="$PROJECT_DIR$/src/myCode/services/userService/AccountLogin.java" />
+        <option value="$PROJECT_DIR$/src/services/UserService.java" />
+        <option value="$PROJECT_DIR$/src/model/Item.java" />
+        <option value="$PROJECT_DIR$/src/model/Address.java" />
+        <option value="$PROJECT_DIR$/src/view/UserLoginMenu.java" />
+        <option value="$PROJECT_DIR$/src/dao/UserDao.java" />
+        <option value="$PROJECT_DIR$/src/dao/ItemDao.java" />
+        <option value="$PROJECT_DIR$/src/view/Main.java" />
+        <option value="$PROJECT_DIR$/src/view/AdminMenus.java" />
+        <option value="$PROJECT_DIR$/src/services/AdminService.java" />
+        <option value="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" />
+        <option value="$PROJECT_DIR$/src/dao/OrderDao.java" />
+        <option value="$PROJECT_DIR$/src/services/PurchaseService.java" />
+        <option value="$PROJECT_DIR$/src/services/ShoppingCartManager.java" />
+        <option value="$PROJECT_DIR$/src/view/UserPurchaseMenu.java" />
       </list>
     </option>
   </component>
@@ -190,10 +165,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="1382" />
-    <option name="height" value="735" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="594" />
+    <option name="height" value="436" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -203,9 +179,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -222,13 +198,7 @@
               <item name="online-store" type="b2602c69:ProjectViewProjectNode" />
               <item name="online-store" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="online-store" type="b2602c69:ProjectViewProjectNode" />
-              <item name="online-store" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="dto" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -237,16 +207,22 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SearchEverywhereHistoryKey" value="updateShopp&#9;PSI&#9;JAVA://services.ShoppingCartManager#updateShoppingCart&#10;search&#9;PSI&#9;JAVA://dao.ItemDao#search&#10;setItemsOf&#9;PSI&#9;JAVA://dao.ShoppingCartDao#setItemsOfCart&#10;stock&#9;PSI&#9;JAVA://dto.Item#stock" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/mysql-connector-java-8.0.19.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Mahsa\IdeaProjects\online-store\src" />
+      <recent name="C:\Users\Mahsa\IdeaProjects\online-store\src\refactoredCode" />
+    </key>
     <key name="CreateClassDialog.RecentsKey">
       <recent name="" />
     </key>
@@ -263,9 +239,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main (1)">
+    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.Main" />
+      <module name="online-store" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+      <option name="MAIN_CLASS_NAME" value="myCode.testOnlineStore.Main" />
       <module name="online-store" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
@@ -310,8 +297,13 @@
       <properties />
       <listeners />
     </configuration>
+    <list>
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.Main (1)" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -335,18 +327,44 @@
       <workItem from="1583175301076" duration="11074000" />
       <workItem from="1583230920359" duration="11593000" />
       <workItem from="1583328050726" duration="3195000" />
+      <workItem from="1583331742928" duration="2182000" />
+      <workItem from="1583385812167" duration="641000" />
+      <workItem from="1584084841551" duration="5000" />
+      <workItem from="1584085046391" duration="9000" />
+      <workItem from="1584085188148" duration="573000" />
+      <workItem from="1586362794844" duration="1961000" />
+      <workItem from="1586407113116" duration="1375000" />
+      <workItem from="1586439794051" duration="926000" />
+      <workItem from="1586448037268" duration="8510000" />
+      <workItem from="1586493561354" duration="1368000" />
+      <workItem from="1586505132410" duration="1652000" />
+      <workItem from="1586510156574" duration="19138000" />
+      <workItem from="1586531068266" duration="1751000" />
+      <workItem from="1586536521159" duration="86000" />
+      <workItem from="1586537392052" duration="17000" />
+      <workItem from="1586716908162" duration="4348000" />
+      <workItem from="1586880818174" duration="1589000" />
+      <workItem from="1586965599915" duration="5016000" />
+      <workItem from="1586970716870" duration="469000" />
+      <workItem from="1586990569447" duration="35000" />
+      <workItem from="1587013458602" duration="239000" />
+      <workItem from="1587018468093" duration="14000" />
+      <workItem from="1587020238434" duration="769000" />
+      <workItem from="1587023967548" duration="158000" />
+      <workItem from="1587025793717" duration="6115000" />
+      <workItem from="1587044275172" duration="325000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90161000" />
+    <option name="totallyTimeSpent" value="149432000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1382" height="735" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
       <window_info anchor="bottom" id="TODO" order="11" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32903227" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
@@ -354,24 +372,25 @@
       <window_info anchor="right" id="Maven Projects" order="4" />
       <window_info anchor="bottom" id="Database Changes" order="2" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="1" />
-      <window_info anchor="bottom" id="Run" order="7" weight="0.41129032" />
+      <window_info anchor="bottom" id="Run" order="7" weight="0.40699524" />
       <window_info anchor="bottom" id="Terminal" order="3" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="0" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.24963397" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.17715959" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="6" weight="0.32903227" />
       <window_info id="Structure" order="6" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
       <window_info id="UI Designer" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="8" weight="0.36935484" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.3672496" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="10" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="5" />
       <window_info anchor="bottom" id="Cvs" order="9" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="6" weight="0.32750398" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32750398" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -382,415 +401,192 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="37" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/myCode/dao/CategoryDao.java</url>
+          <line>12</line>
+          <properties />
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/myCode/services/adminService/CategoryManagement.java</url>
+          <line>13</line>
+          <properties />
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/myCode/dao/AdminDao.java</url>
+          <line>47</line>
+          <properties />
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="53" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/dto/ShoppingCart.java">
+    <entry file="file://$PROJECT_DIR$/src/dto/shopping_cart.java" />
+    <entry file="file://$PROJECT_DIR$/src/services/userService/x.java" />
+    <entry file="file://$PROJECT_DIR$/src/menus.java" />
+    <entry file="file://$PROJECT_DIR$/src/menus/MenusPresentation.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_221/src.zip!/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
+        <state relative-caret-position="112">
+          <caret line="908" selection-start-line="908" selection-end-line="908" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Category.java">
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/Order.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/Category.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/Admin.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/ShoppingCart.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/ShoppingCartDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/OrderDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/AddressDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/AdminDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/ItemDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/Address.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/adminService/AccountLogin.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/adminService/CategoryManagement.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/OrderManagement.java" />
+    <entry file="file://$PROJECT_DIR$/src/refactoredCode/src/dao/ItemDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/adminService/ProductManagement.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/User.java" />
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_221/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
+        <state relative-caret-position="2057">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/adminService/UsersStatusPresentation.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/AccountLogin.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/AccountRegistration.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/dto/Item.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/ProductPresentation.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/ShoppingCartManagement.java" />
+    <entry file="file://$PROJECT_DIR$/src/model/Address.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="35" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
+        <state relative-caret-position="343">
+          <caret line="69" column="30" lean-forward="true" selection-start-line="69" selection-start-column="30" selection-end-line="69" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myCode/services/userService/CategoryPresentation.java" />
+    <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="34" column="13" lean-forward="true" selection-start-line="34" selection-start-column="13" selection-end-line="34" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/CategoryDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myCode/dao/UserDao.java" />
+    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myCode/menus/AdminMenus.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/menus/UserMenus.java" />
+    <entry file="file://$PROJECT_DIR$/src/myCode/testOnlineStore/Main.java" />
+    <entry file="file://$PROJECT_DIR$/src/model/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Item.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-894">
+          <caret line="17" column="47" lean-forward="true" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/AdminService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="70" column="24" lean-forward="true" selection-start-line="70" selection-start-column="24" selection-end-line="70" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/ItemDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="120" column="51" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="119" column="60" selection-start-line="119" selection-start-column="60" selection-end-line="119" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AdminDao.java">
+    <entry file="file://$PROJECT_DIR$/src/services/PurchaseService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="31" column="86" selection-start-line="31" selection-start-column="86" selection-end-line="31" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="462">
+          <caret line="55" column="64" selection-start-line="55" selection-start-column="64" selection-end-line="55" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/ShoppingCartDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="47" column="13" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/ShoppingCart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="35" lean-forward="true" selection-start-line="34" selection-start-column="35" selection-end-line="34" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/ItemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="120" column="51" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AdminDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="31" column="86" selection-start-line="31" selection-start-column="86" selection-end-line="31" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="38" column="34" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3519">
-          <caret line="213" column="59" lean-forward="true" selection-start-line="213" selection-start-column="59" selection-end-line="213" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/ShoppingCartDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="47" column="13" lean-forward="true" selection-start-line="47" selection-start-column="13" selection-end-line="47" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/ShoppingCart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="19" lean-forward="true" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/ItemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1887">
-          <caret line="120" column="51" lean-forward="true" selection-start-line="120" selection-start-column="51" selection-end-line="120" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AdminDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="31" lean-forward="true" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="31" column="86" selection-start-line="31" selection-start-column="86" selection-end-line="31" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="38" column="34" lean-forward="true" selection-start-line="38" selection-start-column="34" selection-end-line="38" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/shopping_cart.java" />
-    <entry file="file://$PROJECT_DIR$/src/dto/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="35" lean-forward="true" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/shopping_cart.java" />
-    <entry file="file://$PROJECT_DIR$/src/dto/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Admin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="7" column="28" lean-forward="true" selection-start-line="7" selection-start-column="28" selection-end-line="7" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AdminDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12">
-          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="32" column="18" selection-start-line="32" selection-start-column="18" selection-end-line="32" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/UserDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="52" column="39" lean-forward="true" selection-start-line="52" selection-start-column="39" selection-end-line="52" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/ShoppingCart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="8" column="29" lean-forward="true" selection-start-line="8" selection-start-column="29" selection-end-line="8" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Item.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="49" selection-start-line="30" selection-start-column="49" selection-end-line="30" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/ItemDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="75" column="38" selection-start-line="75" selection-start-column="38" selection-end-line="75" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="116">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/dao/OrderDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="374">
+          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dto/Order.java">
+    <entry file="file://$PROJECT_DIR$/src/services/ShoppingCartManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="697">
-          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
+        <state relative-caret-position="561">
+          <caret line="40" column="5" lean-forward="true" selection-start-line="40" selection-start-column="5" selection-end-line="40" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/CategoryDao.java">
+    <entry file="file://$PROJECT_DIR$/src/view/AdminMenus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="326">
+          <caret line="155" column="45" selection-start-line="155" selection-start-column="45" selection-end-line="155" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/AddressDao.java">
+    <entry file="file://$PROJECT_DIR$/src/view/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="309">
+          <caret line="26" column="47" lean-forward="true" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/dao/ShoppingCartDao.java">
+    <entry file="file://$PROJECT_DIR$/src/view/UserLoginMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="29" column="30" selection-start-line="29" selection-start-column="30" selection-end-line="29" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="520">
+          <caret line="57" column="42" selection-start-line="57" selection-start-column="42" selection-end-line="57" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/view/UserPurchaseMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="346" column="45" selection-start-line="346" selection-start-column="45" selection-end-line="346" selection-end-column="45" />
+        <state relative-caret-position="170">
+          <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -1,14 +1,15 @@
 package dao;
 
-import dto.Admin;
-import dto.Category;
-import dto.Item;
+import model.Admin;
+import model.Category;
+import model.Item;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ItemDao {
@@ -48,19 +49,21 @@ public class ItemDao {
         }
     }
 
-    public void showAll() throws Exception {
+    public HashSet<String> findAll() throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM item");
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            HashSet<String> items = new HashSet<>();
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
-                System.out.println(name);
+                items.add(name);
             }
             preparedStatement.close();
             connection.close();
+            return items;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
@@ -98,7 +101,6 @@ public class ItemDao {
             connection.close();
             return items;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
         }
         return null;
     }
@@ -131,7 +133,6 @@ public class ItemDao {
             connection.close();
             return items;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
         }
         return null;
     }
@@ -146,12 +147,11 @@ public class ItemDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public int getIdFromDataBase(String name) throws Exception {
+    public int getIdIfExist(String name) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM item WHERE name=?");
@@ -164,7 +164,6 @@ public class ItemDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;
@@ -183,7 +182,6 @@ public class ItemDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

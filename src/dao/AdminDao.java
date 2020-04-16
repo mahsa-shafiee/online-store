@@ -1,7 +1,6 @@
 package dao;
 
-import dto.Address;
-import dto.Admin;
+import model.Admin;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,12 +37,11 @@ public class AdminDao {
             connection.close();
             return admins;
         } catch (SQLException e) {
-            System.out.println("SQL exception occurred " + e);
         }
         return null;
     }
 
-    public int getIdFromDataBase(Admin admin) throws Exception {
+    public int getIdIfExist(Admin admin) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM admin WHERE name=? and password=?");
@@ -57,7 +55,6 @@ public class AdminDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

@@ -1,8 +1,8 @@
-package dto;
+package model;
 
 import java.util.Objects;
 
-public class Item {
+public class Item implements Comparable<Item> {
     private int id;
     private Category category;
     private String name;
@@ -101,4 +101,10 @@ public class Item {
     public void setAdmin(Admin admin) {
         this.admin = admin;
     }
+
+    @Override
+    public int compareTo(Item item) {
+        return this.price == item.getPrice() ? 0 : this.price > item.getPrice() ? 1 : -1;
+    }
+
 }

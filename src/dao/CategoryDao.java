@@ -1,6 +1,6 @@
 package dao;
 
-import dto.Category;
+import model.Category;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +18,12 @@ public class CategoryDao {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Added successfully.");
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public HashSet<String> showAll() throws Exception {
+    public HashSet<String> findAll() throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM category");
@@ -33,14 +31,12 @@ public class CategoryDao {
             HashSet<String> categoryNames = new HashSet<>();
             while (resultSet.next()) {
                 String name = resultSet.getString(1);
-                System.out.println(name);
                 categoryNames.add(name);
             }
             preparedStatement.close();
             connection.close();
             return categoryNames;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
@@ -54,9 +50,7 @@ public class CategoryDao {
             int rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Renamed successfully.(" + rowAffected + " Rows Affected)");
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
@@ -69,14 +63,12 @@ public class CategoryDao {
             int rowAffected = preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
-            System.out.println("Deleted successfully.(" + rowAffected + " Rows Affected)");
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public int getIdFromDataBase(String name) throws Exception {
+    public int getIdIfExist(String name) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM category WHERE name=?");
@@ -89,7 +81,6 @@ public class CategoryDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

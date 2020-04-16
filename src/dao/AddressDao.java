@@ -1,6 +1,6 @@
 package dao;
 
-import dto.Address;
+import model.Address;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,12 +21,11 @@ public class AddressDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public int getIdFromDataBase(Address address) throws Exception {
+    public int getIdIfExist(Address address) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM address WHERE state=? and city=? and street=? and postal_code=?");
@@ -42,7 +41,6 @@ public class AddressDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

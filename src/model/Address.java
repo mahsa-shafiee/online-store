@@ -1,4 +1,4 @@
-package dto;
+package model;
 
 public class Address {
     private int id;
@@ -64,5 +64,15 @@ public class Address {
         this.city = city;
         this.street = street;
         this.postalCode = postalCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "state='" + state + '\'' +
+                ", city='" + city + '\'' +
+                ", street='" + street + '\'' +
+                ", postalCode=" + postalCode +
+                '}';
     }
 }

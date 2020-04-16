@@ -1,8 +1,7 @@
 package dao;
 
-import com.sun.org.apache.xpath.internal.operations.Or;
-import dto.Item;
-import dto.Order;
+import model.Item;
+import model.Order;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,12 +20,11 @@ public class OrderDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }
 
-    public List<Order> showOrdersOfuser(int users_id) throws Exception {
+    public List<Order> findOrdersOfUser(int users_id) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.date,i.name,i.description,i.price FROM " +
@@ -48,7 +46,6 @@ public class OrderDao {
             connection.close();
             return orders;
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
     }

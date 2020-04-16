@@ -1,7 +1,7 @@
 package dao;
 
-import dto.Address;
-import dto.User;
+import model.Address;
+import model.User;
 
 import java.sql.*;
 
@@ -23,15 +23,16 @@ public class UserDao {
         try {
             Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("insert into users(user_name,password" +
-                    ",first_name,last_name,moblie_number,email_address,home_address_id)" +
-                    " values (?,?,?,?,?,?,?);");
+                    ",first_name,last_name,age,moblie_number,email_address,home_address_id)" +
+                    " values (?,?,?,?,?,?,?,?);");
             preparedStatement.setString(1, user.getUserName());
             preparedStatement.setString(2, user.getPassword());
             preparedStatement.setString(3, user.getFirstName());
             preparedStatement.setString(4, user.getLastName());
-            preparedStatement.setString(5, user.getMobileNumber());
-            preparedStatement.setString(6, user.getEmailAddress());
-            preparedStatement.setInt(7, user.getHomeAddress().getId());
+            preparedStatement.setInt(5, user.getAge());
+            preparedStatement.setString(6, user.getMobileNumber());
+            preparedStatement.setString(7, user.getEmailAddress());
+            preparedStatement.setInt(8, user.getHomeAddress().getId());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
@@ -42,13 +43,18 @@ public class UserDao {
         }
     }
 
-    public User[] search(String userName, String password) {
+    public User[] search(String userName, String password, boolean isReport) {
         try {
             Connection connection = getConnection();
-            String query = "select * from users u join address a on a.id=u.home_address_id where u.user_name=? and u.password =?";
+            String query = "select * from users u join address a on a.id=u.home_address_id where u.user_name like ? and u.password like ?";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, userName);
-            preparedStatement.setString(2, password);
+            if (isReport) {
+                preparedStatement.setString(1, "%" + userName + "%");
+                preparedStatement.setString(2, "%" + password + "%");
+            } else {
+                preparedStatement.setString(1, userName);
+                preparedStatement.setString(2, password);
+            }
             ResultSet resultSet = preparedStatement.executeQuery();
             User[] users = new User[1];
             int index = 0;
@@ -66,15 +72,16 @@ public class UserDao {
                 user.setPassword(resultSet.getString(3));
                 user.setFirstName(resultSet.getString(4));
                 user.setLastName(resultSet.getString(5));
-                user.setMobileNumber(resultSet.getString(6));
-                user.setEmailAddress(resultSet.getString(7));
+                user.setAge(resultSet.getInt(6));
+                user.setMobileNumber(resultSet.getString(7));
+                user.setEmailAddress(resultSet.getString(8));
                 Address address = new Address();
                 user.setHomeAddress(address);
-                address.setId(resultSet.getInt(8));
-                address.setState(resultSet.getString(10));
-                address.setCity(resultSet.getString(11));
-                address.setStreet(resultSet.getString(12));
-                address.setPostalCode(resultSet.getLong(13));
+                address.setId(resultSet.getInt(9));
+                address.setState(resultSet.getString(11));
+                address.setCity(resultSet.getString(12));
+                address.setStreet(resultSet.getString(13));
+                address.setPostalCode(resultSet.getLong(14));
                 users[index] = user;
                 index++;
             }
@@ -88,7 +95,7 @@ public class UserDao {
         return null;
     }
 
-    public int getIdFromDataBase(User user) throws Exception {
+    public int getIdIfExist(User user) throws Exception {
         try {
             Connection connection = UserDao.getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM users WHERE user_name=?");
@@ -101,7 +108,6 @@ public class UserDao {
             preparedStatement.close();
             connection.close();
         } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
             throw e;
         }
         return -1;

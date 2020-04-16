@@ -1,12 +1,26 @@
-package dto;
+package model;
 
 import java.util.HashSet;
 
-public class Admin {
+public class Category {
     private int id;
     private String name;
-    private String password;
     private HashSet<Item> items;
+    private Admin admin;
+
+    public Category() {
+    }
+
+    public Category(int id, String name, Admin admin) {
+        this.id = id;
+        this.name = name;
+        this.admin = admin;
+    }
+
+    public Category(String name, Admin admin) {
+        this.name = name;
+        this.admin = admin;
+    }
 
     public int getId() {
         return id;
@@ -24,12 +38,12 @@ public class Admin {
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
+    public Admin getAdmin() {
+        return admin;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAdmin(Admin admin) {
+        this.admin = admin;
     }
 
     public HashSet<Item> getItems() {
@@ -39,15 +53,4 @@ public class Admin {
     public void setItems(HashSet<Item> items) {
         this.items = items;
     }
-
-    public HashSet<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(HashSet<Category> categories) {
-        this.categories = categories;
-    }
-
-    private HashSet<Category> categories;
-
 }

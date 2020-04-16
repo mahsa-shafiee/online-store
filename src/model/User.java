@@ -1,25 +1,27 @@
-package dto;
+package model;
 
-public class User {
+public class User implements Comparable<User> {
     private int id;
     private String userName;
     private String password;
     private String firstName;
     private String lastName;
+    private int age;
     private String mobileNumber;
     private String emailAddress;
     private Address homeAddress;
-    private ShoppingCart shoppingcart;
+    private ShoppingCart shoppingCart;
     private Order order;
 
     public User() {
     }
 
-    public User(String userName, String password, String firstName, String lastName, String mobileNumber, String emailAddress, Address homeAddress) {
+    public User(String userName, String password, String firstName, String lastName, int age, String mobileNumber, String emailAddress, Address homeAddress) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.age = age;
         this.mobileNumber = mobileNumber;
         this.emailAddress = emailAddress;
         this.homeAddress = homeAddress;
@@ -65,6 +67,10 @@ public class User {
         this.lastName = lastName;
     }
 
+    public int getAge() { return age; }
+
+    public void setAge(int age) { this.age = age; }
+
     public String getMobileNumber() {
         return mobileNumber;
     }
@@ -89,12 +95,12 @@ public class User {
         this.homeAddress = homeAddress;
     }
 
-    public ShoppingCart getShoppingcart() {
-        return shoppingcart;
+    public ShoppingCart getShoppingCart() {
+        return shoppingCart;
     }
 
-    public void setShoppingcart(ShoppingCart shoppingcart) {
-        this.shoppingcart = shoppingcart;
+    public void setShoppingCart(ShoppingCart shoppingCart) {
+        this.shoppingCart = shoppingCart;
     }
 
     public Order getOrder() {
@@ -103,5 +109,24 @@ public class User {
 
     public void setOrder(Order order) {
         this.order = order;
+    }
+
+
+    @Override
+    public int compareTo(User user) {
+        return this.age == user.getAge() ? 0 : this.age > user.getAge() ? 1 : -1;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", homeAddress=" + homeAddress +
+                '}';
     }
 }
