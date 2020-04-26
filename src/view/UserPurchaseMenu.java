@@ -25,10 +25,10 @@ public class UserPurchaseMenu {
                 String choice = scanner.next();
                 switch (choice) {
                     case "1":
-                        case1(user);
+                        displayCategoriesAndProducts(user);
                         break;
                     case "2":
-                        case2(user);
+                        displayAndManageShoppingCart(user);
                         break;
                     case "3":
                         displayOrders(user);
@@ -49,7 +49,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    public void case1(User user) throws Exception {
+    public void displayCategoriesAndProducts(User user) throws Exception {
         String categoryName = displayAndGetCategoryName();
         if (categoryName == null)
             return;
@@ -85,7 +85,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    public void case2(User user) throws Exception {
+    public void displayAndManageShoppingCart(User user) throws Exception {
         String answer;
         if (!displayShoppingCart(user))
             return;

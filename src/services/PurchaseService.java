@@ -31,12 +31,10 @@ public class PurchaseService {
     }
 
     public void finalizeOrder(User user) throws Exception {
-        shoppingCartDao.findItems(user);
         user.getShoppingCart().setId(shoppingCartDao.getIdIfExist(userDao.getIdIfExist(user)));
         long millis = System.currentTimeMillis();
         java.sql.Date date = new java.sql.Date(millis);
         for (Item item : user.getShoppingCart().getItems()) {
-            shoppingCartDao.findItems(user);
             if (itemDao.getStock(item) <= 0) {
                 user.getShoppingCart().getItems().remove(item);
                 System.out.println(item.getName() + " is not available.");

@@ -18,8 +18,6 @@ public class ShoppingCartManager {
         if (user.getShoppingCart() != null && user.getShoppingCart().getItems().size() == 5) {
             return false;
         }
-        if (user.getShoppingCart() == null)
-            System.out.println("nooo");
         ShoppingCart shoppingCart = new ShoppingCart();
         shoppingCart.setItem(item);
         shoppingCart.setUser(user);
