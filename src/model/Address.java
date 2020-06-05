@@ -1,11 +1,18 @@
 package model;
 
+import javax.persistence.*;
+
+@Entity(name = "address")
 public class Address {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String state;
     private String city;
     private String street;
+    @Column(name = "postal_code")
     private long postalCode;
+    @OneToOne(mappedBy = "homeAddress", cascade = CascadeType.ALL)
     private User user;
 
     public int getId() {

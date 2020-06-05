@@ -4,6 +4,10 @@ import dao.AddressDao;
 import dao.UserDao;
 import model.Address;
 import model.User;
+import util.DateUtil;
+import util.OperationType;
+
+import java.util.List;
 
 public class UserService {
 
@@ -11,7 +15,7 @@ public class UserService {
     private AddressDao addressDao = new AddressDao();
 
     public User validateUser(String userName, String password) {
-        User[] users = this.userDao.search(userName, password, false);
+        List<User> users = this.userDao.search(userName, password, false);
         for (User user : users) {
             if (user != null)
                 return user;
@@ -19,9 +23,11 @@ public class UserService {
         return null;
     }
 
-    public void registerNewUser(User user, Address address) throws Exception {
+    public void registerNewUser(User user, Address address) {
         addressDao.insert(address);
         address.setId(addressDao.getIdIfExist(address));
         userDao.insert(user);
+        user.setId(userDao.getIdIfExist(user));
     }
+
 }

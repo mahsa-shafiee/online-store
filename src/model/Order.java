@@ -1,11 +1,21 @@
 package model;
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity(name = "orders")
+@Table(name = "orders")
 public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Temporal(TemporalType.DATE)
     private Date date;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "users_id")
     private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
     private Item item;
 
     public Order() {
@@ -55,7 +65,7 @@ public class Order {
         return "Order{" +
                 "date=" + date +
                 "\nitem={ name= " + item.getName() +
-                "  Price= " + item.getPrice() +" Rials}"+
+                "  Price= " + item.getPrice() + " Rials}" +
                 "}";
     }
 }

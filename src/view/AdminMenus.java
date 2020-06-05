@@ -4,6 +4,7 @@ import model.Admin;
 import model.Item;
 import model.User;
 import services.AdminService;
+import util.DateUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +24,8 @@ public class AdminMenus {
                     System.out.println(Main.GREEN_BOLD + "What do you want to do?" + Main.ANSI_RESET +
                             "\n1)Edit categories 2)Edit products 3)View users status report (Sorted by user age) 4)exit");
                     String choice = scanner.next();
+                    admin.setName(adminUserName);
+                    admin.setPassword(adminPassword);
                     switch (choice) {
                         case "1":
                             System.out.println(
@@ -30,8 +33,6 @@ public class AdminMenus {
                             choice = scanner.next();
                             switch (choice) {
                                 case "1":
-                                    admin.setName(adminUserName);
-                                    admin.setPassword(adminPassword);
                                     addCategory(admin);
                                     break;
                                 case "2":
@@ -127,6 +128,7 @@ public class AdminMenus {
         Item item = new Item(splitInformation[0], splitInformation[1],
                 Long.parseLong(splitInformation[2]),
                 Integer.parseInt(splitInformation[3]), admin);
+        System.out.println(admin.getPassword());
         adminService.addProduct(admin, item, categoryName);
     }
 
@@ -158,6 +160,43 @@ public class AdminMenus {
         for (User user : allUsers) {
             System.out.println(userNumber + ") " + user.toString());
             userNumber++;
+        }
+    }
+
+
+
+    private String getSinceDate() {
+        System.out.println("Since what date do you want to see logs?\ne.g., 2020-04-03");
+        while (true) {
+            try {
+                String dateStr = scanner.next();
+                DateUtil.convertStrToDate(dateStr);
+                return dateStr;
+            } catch (Exception e) {
+                System.out.println("Invalid date!\nTry again...");
+            }
+        }
+    }
+
+    private User getUser() {
+        List<User> allUsers = adminService.findAllUsers();
+        allUsers.forEach(user -> System.out.println((allUsers.indexOf(user) + 1) + ") " + user.getUserName()));
+        System.out.println("Enter the number of user:");
+        int userNumber = getUserNumber(allUsers.size());
+        return allUsers.get(userNumber - 1);
+    }
+
+    private int getUserNumber(int listSize) {
+        while (true) {
+            try {
+                int userNumber = scanner.nextInt();
+                if (userNumber >= listSize)
+                    throw new IllegalArgumentException();
+                return userNumber;
+            } catch (Exception e) {
+                System.out.println("Invalid number!\nTry again...");
+                scanner.next();
+            }
         }
     }
 

@@ -1,12 +1,23 @@
 package model;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity(name = "shopping_cart")
+@Table(name = "shopping_cart")
 public class ShoppingCart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "users_id")
     private User user;
+    @Transient
     private long totalPrice;
+    @Transient
     private List<Item> items;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "item_id")
     private Item item;
 
     @Override

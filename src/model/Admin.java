@@ -1,12 +1,19 @@
 package model;
 
+import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 
+@Entity(name = "admin")
 public class Admin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
+    @Column(nullable = false)
     private String password;
-    private HashSet<Item> items;
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
+    private List<Item> items;
 
     public int getId() {
         return id;
@@ -32,11 +39,11 @@ public class Admin {
         this.password = password;
     }
 
-    public HashSet<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
-    public void setItems(HashSet<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 

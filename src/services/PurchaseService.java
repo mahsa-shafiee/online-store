@@ -5,6 +5,7 @@ import model.Item;
 import model.Order;
 import model.ShoppingCart;
 import model.User;
+import util.DateUtil;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,17 +31,16 @@ public class PurchaseService {
         return itemDao.getStock(product) > 0;
     }
 
-    public void finalizeOrder(User user) throws Exception {
+    public List<Item> finalizeOrder(User user) throws Exception {
         user.getShoppingCart().setId(shoppingCartDao.getIdIfExist(userDao.getIdIfExist(user)));
-        long millis = System.currentTimeMillis();
-        java.sql.Date date = new java.sql.Date(millis);
+        List<Item> itemsToOrder = user.getShoppingCart().getItems();
         for (Item item : user.getShoppingCart().getItems()) {
             if (itemDao.getStock(item) <= 0) {
                 user.getShoppingCart().getItems().remove(item);
                 System.out.println(item.getName() + " is not available.");
                 continue;
             }
-            Order order = new Order(date, user, item);
+            Order order = new Order(DateUtil.getCurrentDate(), user, item);
             orderDao.insert(order);
         }
         for (Item item : user.getShoppingCart().getItems()) {
@@ -48,9 +48,10 @@ public class PurchaseService {
         }
         shoppingCartDao.deleteCartOfUser(userDao.getIdIfExist(user));
         user.setShoppingCart(new ShoppingCart());
+        return itemsToOrder;
     }
 
-    public List<Order> getOrders(User user) throws Exception {
+    public List getOrders(User user) throws Exception {
         List<Order> orders = orderDao.findOrdersOfUser(userDao.getIdIfExist(user));
         return orders;
     }

@@ -1,188 +1,124 @@
 package dao;
 
-import model.Admin;
-import model.Category;
 import model.Item;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import util.HibernateUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
 public class ItemDao {
-    public void insert(Item item) throws Exception {
+    private Session session;
+
+    public void insert(Item item) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into item(name,description" +
-                    ",price,stock,category_id,admin_id) values (?,?,?,?,?,?);");
-            preparedStatement.setString(1, item.getName());
-            preparedStatement.setString(2, item.getDescription());
-            preparedStatement.setLong(3, item.getPrice());
-            preparedStatement.setInt(4, item.getStock());
-            preparedStatement.setInt(5, item.getCategory().getId());
-            preparedStatement.setInt(6, item.getAdmin().getId());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-            System.out.println("Added successfully.");
-        } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(item);
+            transaction.commit();
+            System.out.println("Item added successfully.");
+        } catch (Exception e) {
+            System.out.println("Exception occurred while saving item...");
             throw e;
         }
     }
 
-    public void delete(String name) throws Exception {
+    public void delete(String name) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM item WHERE name=?");
-            preparedStatement.setString(1, name);
-            int rowAffected = preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "DELETE FROM item WHERE name=:name";
+            Query query = session.createQuery(hql).setParameter("name", name);
+            int rowAffected = query.executeUpdate();
+            transaction.commit();
             System.out.println("Deleted successfully.(" + rowAffected + " Rows Affected)");
-        } catch (SQLException e) {
-            System.out.print("SQL exception occurred : ");
+        } catch (Exception e) {
+            System.out.print("Exception occurred : ");
             throw e;
         }
     }
 
-    public HashSet<String> findAll() throws Exception {
+    public HashSet<String> findAll() {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT name FROM item");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            HashSet<String> items = new HashSet<>();
-            while (resultSet.next()) {
-                String name = resultSet.getString(1);
-                items.add(name);
-            }
-            preparedStatement.close();
-            connection.close();
-            return items;
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "SELECT name FROM item";
+            List<String> itemList = session.createQuery(hql).list();
+            transaction.commit();
+            return new HashSet<>(itemList);
+        } catch (Exception e) {
             throw e;
         }
     }
 
     public Item[] showItemsOfCategory(int category_id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM item where category_id=?");
-            preparedStatement.setInt(1, category_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Item[] items = new Item[0];
-            int index = 0;
-            while (resultSet.next()) {
-                Item[] tmp = new Item[items.length + 1];
-                for (int i = 0; i < items.length; i++)
-                    if (tmp[i] == null)
-                        tmp[i] = items[i];
-                items = tmp;
-                Item item = new Item();
-                item.setId(resultSet.getInt(1));
-                item.setName(resultSet.getString(2));
-                item.setDescription(resultSet.getString(3));
-                item.setPrice(resultSet.getInt(4));
-                item.setStock(resultSet.getInt(5));
-                Category category = new Category();
-                category.setId(resultSet.getInt(6));
-                item.setCategory(category);
-                Admin admin = new Admin();
-                admin.setId(resultSet.getInt(7));
-                item.setAdmin(admin);
-                items[index] = item;
-                index++;
-            }
-            preparedStatement.close();
-            connection.close();
-            return items;
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "FROM item i where i.category.id=:category_id";
+            Query query = session.createQuery(hql).setParameter("category_id", category_id);
+            List<Item> itemList = query.list();
+            transaction.commit();
+            return itemList.toArray(new Item[0]);
+        } catch (Exception e) {
         }
         return null;
     }
 
     public List<Item> search(int id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT i.*,c.name FROM item i join category c" +
-                    " on c.id=i.category_id where i.id=?");
-            preparedStatement.setInt(1, id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Item> items = new ArrayList<>();
-            while (resultSet.next()) {
-                Item item = new Item();
-                item.setId(resultSet.getInt(1));
-                item.setName(resultSet.getString(2));
-                item.setDescription(resultSet.getString(3));
-                item.setPrice(resultSet.getInt(4));
-                item.setStock(resultSet.getInt(5));
-                Category category = new Category();
-                category.setId(resultSet.getInt(6));
-                category.setName(resultSet.getString(8));
-                item.setCategory(category);
-                Admin admin = new Admin();
-                admin.setId(resultSet.getInt(7));
-                item.setAdmin(admin);
-                items.add(item);
-            }
-            preparedStatement.close();
-            connection.close();
-            return items;
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "SELECT i,c.name FROM item i join category c on c.id=i.category where i.id=:id";
+            Query query = session.createQuery(hql).setParameter("id", id);
+            List<Item> itemList = query.list();
+            transaction.commit();
+            return itemList;
+        } catch (Exception e) {
         }
         return null;
     }
 
-    public void setStock(int stock, Item item) throws SQLException {
+    public void setStock(int stock, Item item) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE item SET stock =? WHERE id =?;");
-            preparedStatement.setInt(1, stock);
-            preparedStatement.setLong(2, item.getId());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "UPDATE item SET stock =:stock WHERE id =:id";
+            Query query = session.createQuery(hql).setParameter("stock", stock).setParameter("id", item.getId());
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public int getIdIfExist(String name) throws Exception {
+    public int getIdIfExist(String name) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM item WHERE name=?");
-            preparedStatement.setString(1, name);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                return id;
-            }
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            throw e;
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "SELECT id FROM item WHERE name=:name";
+            Query query = session.createQuery(hql).setParameter("name", name);
+            Object id = query.uniqueResult();
+            transaction.commit();
+            session.close();
+            return (int) id;
+        } catch (Exception e) {
         }
         return -1;
     }
 
-    public int getStock(Item item) throws Exception {
+    public int getStock(Item item) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT stock FROM item WHERE name=?");
-            preparedStatement.setString(1, item.getName());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                return id;
-            }
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            throw e;
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "SELECT stock FROM item WHERE name=:name";
+            Query query = session.createQuery(hql).setParameter("name", item.getName());
+            Object stock = query.uniqueResult();
+            transaction.commit();
+            return (int) stock;
+        } catch (Exception e) {
         }
         return -1;
     }

@@ -25,16 +25,17 @@ public class ShoppingCartManager {
         return true;
     }
 
-    public static boolean deleteProductFromShoppingCart(String productName) throws Exception {
+    public static int deleteProductFromShoppingCart(String productName) throws Exception {
         String[] splitAnswer = productName.split("del ");
         ItemDao itemDao = new ItemDao();
         ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
-        List<Item> search = itemDao.search(itemDao.getIdIfExist(splitAnswer[1]));
+        int productId = itemDao.getIdIfExist(splitAnswer[1]);
+        List<Item> search = itemDao.search(productId);
         if (search != null) {
-            shoppingCartDao.deleteRow(itemDao.getIdIfExist(splitAnswer[1]));
-            return true;
+            shoppingCartDao.deleteRow(productId);
+            return productId;
         } else {
-            return false;
+            return 0;
         }
     }
 

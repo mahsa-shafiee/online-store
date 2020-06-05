@@ -3,89 +3,79 @@ package dao;
 import model.Item;
 import model.ShoppingCart;
 import model.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import util.HibernateUtil;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartDao {
-    public void insert(ShoppingCart shoppingCart) throws Exception {
+    private Session session;
+
+    public void insert(ShoppingCart shoppingCart) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into shopping_cart(users_id,item_id)" +
-                    " values (?,?);");
-            preparedStatement.setInt(1, shoppingCart.getUser().getId());
-            preparedStatement.setInt(2, shoppingCart.getItem().getId());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(shoppingCart);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Exception occurred while saving cart...");
             throw e;
         }
     }
 
     public List<Item> findItems(User user) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT item_id FROM shopping_cart where users_id=?");
-            preparedStatement.setInt(1, user.getId());
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Item> search = new ArrayList<>();
-            while (resultSet.next()) {
-                ItemDao itemDao = new ItemDao();
-                search.add(itemDao.search(resultSet.getInt(1)).get(0));
-            }
-            preparedStatement.close();
-            connection.close();
-            return search;
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "SELECT item FROM shopping_cart where users_id=:users_id";
+            Query query = session.createQuery(hql).setParameter("users_id", user.getId());
+            List<Item> items = query.list();
+            transaction.commit();
+            return items;
+        } catch (Exception e) {
         }
         return null;
     }
 
-    public void deleteRow(int item_id) throws Exception {
+    public void deleteRow(int item_id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM shopping_cart WHERE item_id=? LIMIT 1");
-            preparedStatement.setInt(1, item_id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "select id FROM shopping_cart WHERE item.id=:item_id";
+            Query query = session.createQuery(hql).setParameter("item_id", item_id).setMaxResults(1);
+            Object id = query.uniqueResult();
+            session.createQuery("DELETE FROM shopping_cart WHERE id=:id").setParameter("id", id).executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public void deleteCartOfUser(int user_id) throws Exception {
+    public void deleteCartOfUser(int user_id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM shopping_cart WHERE users_id=?");
-            preparedStatement.setInt(1, user_id);
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "DELETE FROM shopping_cart WHERE users_id=:users_id";
+            Query query = session.createQuery(hql).setParameter("users_id", user_id);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public int getIdIfExist(int user_id) throws Exception {
+    public int getIdIfExist(int user_id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT id FROM shopping_cart WHERE users_id=?");
-            preparedStatement.setInt(1, user_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt(1);
-                return id;
-            }
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
-            throw e;
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String sql = "SELECT c.* FROM shopping_cart c WHERE c.users_id= ?";
+            Query query = session.createNativeQuery(sql, ShoppingCart.class).setParameter(1, user_id);
+            List<ShoppingCart> cart = query.list();
+            transaction.commit();
+            return cart.get(0).getId();
+        } catch (Exception e) {
         }
         return -1;
     }

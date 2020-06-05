@@ -3,6 +3,7 @@ package view;
 import model.Address;
 import model.User;
 import services.UserService;
+import util.OperationType;
 
 import java.util.Scanner;
 
@@ -55,6 +56,7 @@ public class UserLoginMenu {
         User user = userService.validateUser(userName, userPassword);
         if (user != null) {
             System.out.println("Hi " + Main.ANSI_YELLOW + user.getFirstName() + Main.ANSI_RESET + "!");
+
             userPurchaseMenu.showPurchaseMenu(user);
         } else {
             System.out.println(Main.ANSI_RED + "The information entered is incorrect!" + Main.ANSI_RESET);
@@ -73,6 +75,7 @@ public class UserLoginMenu {
         String password = getUserSelectedPassword();
         User user = new User(userName, password, firstName, lastName, age, mobileNumber, emailAddress, homeAddress);
         userService.registerNewUser(user, homeAddress);
+
         userPurchaseMenu.showPurchaseMenu(user);
     }
 

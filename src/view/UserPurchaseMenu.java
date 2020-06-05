@@ -5,16 +5,16 @@ import model.Order;
 import model.User;
 import services.PurchaseService;
 import services.ShoppingCartManager;
+import services.UserService;
+import util.OperationType;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserPurchaseMenu {
     Scanner scanner = new Scanner(System.in);
     private PurchaseService purchaseService = new PurchaseService();
+    private UserService userService = new UserService();
 
     public void showPurchaseMenu(User user) throws Exception {
         outer:
@@ -35,15 +35,18 @@ public class UserPurchaseMenu {
                         break;
                     case "4":
                         Main.SIGN_OUT = true;
+
                         return;
                     case "5":
                         Main.EXIT = true;
+
                         break outer;
                     default:
                         System.out.println(Main.ANSI_RED + "Invalid input!" + Main.ANSI_RESET);
                         break;
                 }
             } catch (Exception e) {
+                System.out.println(e.toString());
                 throw new Exception();
             }
         }
@@ -67,9 +70,12 @@ public class UserPurchaseMenu {
             System.out.println(Main.ANSI_RED + "Sorry, This product is not available." + Main.ANSI_RESET);
             return;
         }
+        OperationType.VIEW_PRODUCT.setItemId(selectedProduct.getId());
+
         System.out.println(Main.BLACK_BOLD + "Would you like to add this product to your shopping Cart?"
                 + Main.ANSI_RESET + "\n(Help: enter Y or N)");
         String answer = scanner.next();
+
         switch (answer) {
             case "Y":
                 if (!ShoppingCartManager.updateShoppingCart(user, selectedProduct)) {
@@ -77,6 +83,8 @@ public class UserPurchaseMenu {
                             "You have to reduce the items or complete your purchase." + Main.ANSI_RESET);
                     break;
                 }
+                OperationType.ADD_TO_CART.setItemId(selectedProduct.getId());
+
                 break;
             case "N":
                 break;
@@ -87,8 +95,13 @@ public class UserPurchaseMenu {
 
     public void displayAndManageShoppingCart(User user) throws Exception {
         String answer;
-        if (!displayShoppingCart(user))
+        if (!displayShoppingCart(user)) {
+            OperationType.VIEW_CART.setItemsIds(new ArrayList<>());
+
             return;
+        }
+        OperationType.VIEW_CART.setItemsIds(user.getShoppingCart().getItems().stream().map(Item::getId).collect(Collectors.toList()));
+
         System.out.println("Enter " + Main.BLACK_BOLD + "order" + Main.ANSI_RESET + " to complete your purchase" +
                 "\n(If you don't want to delete an item or complete your purchase, Press enter.)");
         scanner.nextLine();
@@ -96,7 +109,14 @@ public class UserPurchaseMenu {
         if (answer == null || answer.length() == 0)
             return;
         if (Objects.equals(answer, "order")) {
-            purchaseService.finalizeOrder(user);
+            List<Item> orderedItems = purchaseService.finalizeOrder(user);
+            orderedItems.forEach(item -> {
+                try {
+                    OperationType.ORDER.setItemId(item.getId());
+
+                } catch (Exception ignored) {
+                }
+            });
             System.out.println("Purchased successfully.");
             return;
         }
@@ -104,8 +124,12 @@ public class UserPurchaseMenu {
             System.out.println(Main.ANSI_RED + "Invalid!" + Main.ANSI_RESET);
             return;
         }
-        if (!ShoppingCartManager.deleteProductFromShoppingCart(answer)) {
+        int productId = ShoppingCartManager.deleteProductFromShoppingCart(answer);
+        if (productId == 0) {
             System.out.println(Main.ANSI_RED + "The information entered is incorrect!" + Main.ANSI_RESET);
+        } else {
+            OperationType.DELETE_FROM_CART.setItemId(productId);
+
         }
     }
 
@@ -157,7 +181,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    private boolean displayShoppingCart(User user) throws Exception {
+    private boolean displayShoppingCart(User user) {
 
         user.setShoppingCart(null);
         ShoppingCartManager.setItemsOfCart(user);
@@ -199,6 +223,7 @@ public class UserPurchaseMenu {
             System.out.println(Main.BLUE_BOLD + "NUMBER " + number + " :\n" + Main.ANSI_RESET + order.toString());
             number++;
         }
+
     }
 
 }

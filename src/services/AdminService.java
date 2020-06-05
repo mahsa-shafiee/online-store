@@ -1,14 +1,9 @@
 package services;
 
-import dao.AdminDao;
-import dao.CategoryDao;
-import dao.ItemDao;
-import dao.UserDao;
-import model.Admin;
-import model.Category;
-import model.Item;
-import model.User;
+import dao.*;
+import model.*;
 
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +15,7 @@ public class AdminService {
     CategoryDao categoryDao = new CategoryDao();
     ItemDao itemDao = new ItemDao();
     UserDao userDao = new UserDao();
+
 
     public boolean validateAdmin(String userName, String password) {
         Admin[] admins = adminDao.search(userName, password);
@@ -66,9 +62,10 @@ public class AdminService {
     }
 
     public List<User> findAllUsers() {
-        List<User> allUsers = Arrays.asList(userDao.search("", "", true));
+        List<User> allUsers = (userDao.search("", "", true));
         allUsers = allUsers.stream().sorted().collect(Collectors.toList());
         return allUsers;
     }
+
 
 }

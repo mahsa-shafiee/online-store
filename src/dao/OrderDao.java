@@ -1,51 +1,38 @@
 package dao;
 
-import model.Item;
 import model.Order;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+import util.HibernateUtil;
 
-import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OrderDao {
-    public void insert(Order order) throws Exception {
+    private Session session;
+
+    public void insert(Order order) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("insert into orders(date,users_id" +
-                    ",item_id) values (?,?,?);");
-            preparedStatement.setDate(1, (Date) order.getDate());
-            preparedStatement.setInt(2, order.getUser().getId());
-            preparedStatement.setInt(3, order.getItem().getId());
-            preparedStatement.executeUpdate();
-            preparedStatement.close();
-            connection.close();
-        } catch (SQLException e) {
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            session.save(order);
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Exception occurred while finalizing order...");
             throw e;
         }
     }
 
-    public List<Order> findOrdersOfUser(int users_id) throws Exception {
+    public List<Order> findOrdersOfUser(int users_id) {
         try {
-            Connection connection = UserDao.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT o.date,i.name,i.description,i.price FROM " +
-                    "orders o join item i on o.item_id=i.id WHERE o.users_id=?");
-            preparedStatement.setInt(1, users_id);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            List<Order> orders = new ArrayList<>();
-            while (resultSet.next()) {
-                Order order = new Order();
-                order.setDate(resultSet.getDate(1));
-                Item item = new Item();
-                item.setName(resultSet.getString(2));
-                item.setDescription(resultSet.getString(3));
-                item.setPrice(resultSet.getInt(4));
-                order.setItem(item);
-                orders.add(order);
-            }
-            preparedStatement.close();
-            connection.close();
+            session = HibernateUtil.getSession();
+            Transaction transaction = session.beginTransaction();
+            String hql = "FROM orders o WHERE o.user.id=:users_id";
+            Query query = session.createQuery(hql).setParameter("users_id", users_id);
+            List<Order> orders = query.list();
+            transaction.commit();
             return orders;
-        } catch (SQLException e) {
+        } catch (Exception e) {
             throw e;
         }
     }

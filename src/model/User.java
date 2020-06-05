@@ -1,17 +1,33 @@
 package model;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity(name = "users")
+@Table(name = "users")
 public class User implements Comparable<User> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "user_name", nullable = false, unique = true)
     private String userName;
+    @Column(nullable = false)
     private String password;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(nullable = false)
     private int age;
+    @Column(name = "mobile_number", unique = true, length = 11)
     private String mobileNumber;
+    @Column(name = "email_address")
     private String emailAddress;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "home_address_id")
     private Address homeAddress;
+    @Transient
     private ShoppingCart shoppingCart;
-    private Order order;
 
     public User() {
     }
@@ -67,9 +83,13 @@ public class User implements Comparable<User> {
         this.lastName = lastName;
     }
 
-    public int getAge() { return age; }
+    public int getAge() {
+        return age;
+    }
 
-    public void setAge(int age) { this.age = age; }
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public String getMobileNumber() {
         return mobileNumber;
@@ -101,14 +121,6 @@ public class User implements Comparable<User> {
 
     public void setShoppingCart(ShoppingCart shoppingCart) {
         this.shoppingCart = shoppingCart;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
     }
 
 

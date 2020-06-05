@@ -1,14 +1,22 @@
 package model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity(name = "item")
 public class Item implements Comparable<Item> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id")
     private Category category;
     private String name;
     private String description;
     private long price;
     private int stock;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "admin_id")
     private Admin admin;
 
 
