@@ -56,7 +56,7 @@ public class UserLoginMenu {
         User user = userService.validateUser(userName, userPassword);
         if (user != null) {
             System.out.println("Hi " + Main.ANSI_YELLOW + user.getFirstName() + Main.ANSI_RESET + "!");
-
+            userService.recordNewLog(OperationType.LOGIN, userName);
             userPurchaseMenu.showPurchaseMenu(user);
         } else {
             System.out.println(Main.ANSI_RED + "The information entered is incorrect!" + Main.ANSI_RESET);
@@ -75,7 +75,7 @@ public class UserLoginMenu {
         String password = getUserSelectedPassword();
         User user = new User(userName, password, firstName, lastName, age, mobileNumber, emailAddress, homeAddress);
         userService.registerNewUser(user, homeAddress);
-
+        userService.recordNewLog(OperationType.REGISTER, user.getUserName());
         userPurchaseMenu.showPurchaseMenu(user);
     }
 

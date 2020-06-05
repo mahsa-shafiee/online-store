@@ -35,11 +35,11 @@ public class UserPurchaseMenu {
                         break;
                     case "4":
                         Main.SIGN_OUT = true;
-
+                        userService.recordNewLog(OperationType.LOGOUT, user.getUserName());
                         return;
                     case "5":
                         Main.EXIT = true;
-
+                        userService.recordNewLog(OperationType.EXIT, user.getUserName());
                         break outer;
                     default:
                         System.out.println(Main.ANSI_RED + "Invalid input!" + Main.ANSI_RESET);
@@ -71,7 +71,7 @@ public class UserPurchaseMenu {
             return;
         }
         OperationType.VIEW_PRODUCT.setItemId(selectedProduct.getId());
-
+        userService.recordNewLog(OperationType.VIEW_PRODUCT, user.getUserName());
         System.out.println(Main.BLACK_BOLD + "Would you like to add this product to your shopping Cart?"
                 + Main.ANSI_RESET + "\n(Help: enter Y or N)");
         String answer = scanner.next();
@@ -84,7 +84,7 @@ public class UserPurchaseMenu {
                     break;
                 }
                 OperationType.ADD_TO_CART.setItemId(selectedProduct.getId());
-
+                userService.recordNewLog(OperationType.ADD_TO_CART, user.getUserName());
                 break;
             case "N":
                 break;
@@ -97,11 +97,11 @@ public class UserPurchaseMenu {
         String answer;
         if (!displayShoppingCart(user)) {
             OperationType.VIEW_CART.setItemsIds(new ArrayList<>());
-
+            userService.recordNewLog(OperationType.VIEW_CART, user.getUserName());
             return;
         }
         OperationType.VIEW_CART.setItemsIds(user.getShoppingCart().getItems().stream().map(Item::getId).collect(Collectors.toList()));
-
+        userService.recordNewLog(OperationType.VIEW_CART, user.getUserName());
         System.out.println("Enter " + Main.BLACK_BOLD + "order" + Main.ANSI_RESET + " to complete your purchase" +
                 "\n(If you don't want to delete an item or complete your purchase, Press enter.)");
         scanner.nextLine();
@@ -113,7 +113,7 @@ public class UserPurchaseMenu {
             orderedItems.forEach(item -> {
                 try {
                     OperationType.ORDER.setItemId(item.getId());
-
+                    userService.recordNewLog(OperationType.ORDER, user.getUserName());
                 } catch (Exception ignored) {
                 }
             });
@@ -129,7 +129,7 @@ public class UserPurchaseMenu {
             System.out.println(Main.ANSI_RED + "The information entered is incorrect!" + Main.ANSI_RESET);
         } else {
             OperationType.DELETE_FROM_CART.setItemId(productId);
-
+            userService.recordNewLog(OperationType.DELETE_FROM_CART, user.getUserName());
         }
     }
 
@@ -223,7 +223,7 @@ public class UserPurchaseMenu {
             System.out.println(Main.BLUE_BOLD + "NUMBER " + number + " :\n" + Main.ANSI_RESET + order.toString());
             number++;
         }
-
+        userService.recordNewLog(OperationType.VIEW_ORDERS, user.getUserName());
     }
 
 }

@@ -15,7 +15,7 @@ public class AdminService {
     CategoryDao categoryDao = new CategoryDao();
     ItemDao itemDao = new ItemDao();
     UserDao userDao = new UserDao();
-
+    OperationLogDao operationLogDao = new OperationLogDao();
 
     public boolean validateAdmin(String userName, String password) {
         Admin[] admins = adminDao.search(userName, password);
@@ -67,5 +67,9 @@ public class AdminService {
         return allUsers;
     }
 
+    public List<OperationLog> getOperationLogs(User user, String sinceDate) throws Exception {
+        List<OperationLog> operationLogs = operationLogDao.search(user, sinceDate);
+        return operationLogs;
+    }
 
 }

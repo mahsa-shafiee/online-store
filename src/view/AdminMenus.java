@@ -2,6 +2,7 @@ package view;
 
 import model.Admin;
 import model.Item;
+import model.OperationLog;
 import model.User;
 import services.AdminService;
 import util.DateUtil;
@@ -22,7 +23,7 @@ public class AdminMenus {
             if (adminService.validateAdmin(adminUserName, adminPassword)) {
                 while (true) {
                     System.out.println(Main.GREEN_BOLD + "What do you want to do?" + Main.ANSI_RESET +
-                            "\n1)Edit categories 2)Edit products 3)View users status report (Sorted by user age) 4)exit");
+                            "\n1)Edit categories 2)Edit products 3)View users status report (Sorted by user age) 4)View user log 5)exit");
                     String choice = scanner.next();
                     admin.setName(adminUserName);
                     admin.setPassword(adminPassword);
@@ -65,6 +66,9 @@ public class AdminMenus {
                             showUsersStatusReport();
                             break;
                         case "4":
+                            showUserOperationLogsReport();
+                            break;
+                        case "5":
                             Main.EXIT = true;
                             return;
                         default:
@@ -163,7 +167,22 @@ public class AdminMenus {
         }
     }
 
+    private void showUserOperationLogsReport() throws Exception {
+        User user = getUser();
+        String dateStr = getSinceDate();
+        List<OperationLog> operationLogs = adminService.getOperationLogs(user, dateStr);
 
+        System.out.println(Main.BLACK_BOLD + "Operations of user '" + user.getUserName()
+                + "' since " + dateStr + " to a month later:" + Main.ANSI_RESET);
+
+        int logNumber = 1;
+        for (OperationLog operationLog : operationLogs) {
+            System.out.println(logNumber + ")User with username '" + operationLog.getAuthority()
+                    + "' performed an " + operationLog.getOperation()
+                    + " operation on " + operationLog.getDate() + " at " + operationLog.getTime());
+            logNumber++;
+        }
+    }
 
     private String getSinceDate() {
         System.out.println("Since what date do you want to see logs?\ne.g., 2020-04-03");
