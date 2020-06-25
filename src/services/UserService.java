@@ -21,6 +21,7 @@ public class UserService {
     private OperationLogDao operationLogDao = new OperationLogDao();
 
     public User validateUser(String userName, String password) {
+        System.out.println("Please wait...");
         List<User> users = this.userDao.search(userName, password, false);
         for (User user : users) {
             if (user != null)
@@ -30,6 +31,7 @@ public class UserService {
     }
 
     public void registerNewUser(User user, Address address) {
+        System.out.println("Please wait...");
         addressDao.insert(address);
         address.setId(addressDao.getIdIfExist(address));
         userDao.insert(user);

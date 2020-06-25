@@ -18,6 +18,7 @@ public class AdminService {
     OperationLogDao operationLogDao = new OperationLogDao();
 
     public boolean validateAdmin(String userName, String password) {
+        System.out.println("Please wait...");
         Admin[] admins = adminDao.search(userName, password);
         for (Admin admin : admins) {
             if (admin != null) {

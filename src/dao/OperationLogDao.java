@@ -1,8 +1,11 @@
 package dao;
 
 
+import com.sun.jmx.snmp.ThreadContext;
 import model.OperationLog;
 import model.User;
+import org.apache.log4j.Logger;
+import org.apache.log4j.MDC;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -13,15 +16,14 @@ import java.util.List;
 
 public class OperationLogDao {
     private Session session;
+    static Logger userLogger = Logger.getLogger(OperationLogDao.class);
 
     public void insert(OperationLog operationLog) {
+        MDC.put("authority", operationLog.getAuthority());
         try {
-            session = HibernateUtil.getSession();
-            Transaction transaction = session.beginTransaction();
-            session.save(operationLog);
-            transaction.commit();
-        } catch (Exception e) {
-            throw e;
+            userLogger.info(operationLog.getOperation());
+        } finally {
+            MDC.remove("user");
         }
     }
 
