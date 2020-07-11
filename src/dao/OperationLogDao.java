@@ -1,7 +1,6 @@
 package dao;
 
 
-import com.sun.jmx.snmp.ThreadContext;
 import model.OperationLog;
 import model.User;
 import org.apache.log4j.Logger;

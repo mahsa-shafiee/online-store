@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="log4j-1.2.15">
+  <library name="log4j-1.2.151">
     <CLASSES>
-      <root url="jar://C:/Java Libraries/log4j-1.2.15.jar!/" />
+      <root url="jar://$USER_HOME$/Documents/Java Libraries/log4j-1.2.15.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -91,57 +91,104 @@ public class UserLoginMenu {
 
     private String getUserFirstName() {
         System.out.println("Enter your first name:");
-        return scanner.next();
+        String firstName = scanner.next();
+        if (isValidName(firstName))
+            return firstName;
+        throw new IllegalArgumentException("< You have entered invalid last name! >");
     }
 
     private String getUserLastName() {
         System.out.println("Enter your last name:");
-        return scanner.next();
+        String lastName = scanner.next();
+        if (isValidName(lastName)) return lastName;
+        throw new IllegalArgumentException("< You have entered invalid last name! >");
     }
 
-    private int getUserAge() throws Exception {
+    public boolean isValidName(String name) {
+        return isAlphabetic(name) && name.length() > 3 && name.length() < 15;
+    }
+
+    private int getUserAge() {
         System.out.println("Enter your age:");
-        int age = scanner.nextInt();
-        if (age <= 0) {
-            throw new Exception("< You have entered an invalid age! >");
-        } else return age;
+        String age = scanner.next();
+        if (isValidAge(age)) return Integer.parseInt(age);
+        throw new IllegalArgumentException("< You have entered an invalid age! >");
     }
 
+    public boolean isValidAge(String age) {
+        return isNumeric(age) && Integer.parseInt(age) > 7 && Integer.parseInt(age) < 120;
+    }
 
-    private String getUserMobileNumber() throws Exception {
+    private String getUserMobileNumber() {
         System.out.println("Mobile number:\nHelp : It should be 11 digits!");
         String mobileNumber = scanner.next();
-        for (int i = 0; i < mobileNumber.length(); i++) {
-            if (!Character.isDigit(mobileNumber.charAt(i)) || mobileNumber.length() != 11)
-                throw new Exception("< It's not 11 digits! >");
-        }
-        return mobileNumber;
+        if (isValidMobileNumber(mobileNumber)) return mobileNumber;
+        throw new IllegalArgumentException("< You have entered invalid mobile number! >");
     }
 
-    private String getUserEmailAddress() throws Exception {
+    public boolean isValidMobileNumber(String mobileNumber) {
+        return isNumeric(mobileNumber) && mobileNumber.length() == 11 && mobileNumber.charAt(0) == '0';
+    }
+
+    private String getUserEmailAddress() {
         System.out.println("Email address:");
         String emailAddress = scanner.next();
-        if (!emailAddress.contains("@"))
-            throw new Exception("< It doesn't contain '@' >");
-        return emailAddress;
+        if (isValidEmailAddress(emailAddress)) return emailAddress;
+        throw new IllegalArgumentException("< You have entered invalid email address! >");
     }
 
-    private Address getUserHomeAddress() throws Exception {
+    public boolean isValidEmailAddress(String emailAddress) {
+        return (emailAddress.contains("@") && emailAddress.contains(".com")
+                && isAlphabeticOrNumeric(emailAddress.split("@")[0]));
+    }
+
+    private Address getUserHomeAddress() {
         System.out.println("Home address:(state,city,street,postal_code)");
         String[] homeAddress = scanner.next().split(",");
-        if (homeAddress[3].length() != 10)
-            throw new Exception("< Postal code should be 10 digits! >");
-        Address address = new Address(homeAddress[0], homeAddress[1], homeAddress[2], Long.parseLong(homeAddress[3]));
-        return address;
+        Address address = null;
+        if (isValidHomeAddress(homeAddress[0], homeAddress[1], homeAddress[2], homeAddress[3])) {
+            address = new Address(homeAddress[0], homeAddress[1], homeAddress[2], Long.parseLong(homeAddress[3]));
+            return address;
+        }
+        throw new IllegalArgumentException("< You have entered invalid home address! >");
+    }
+
+    public boolean isValidHomeAddress(String state, String city, String street, String postal_code) {
+        return isAlphabetic(state) && isAlphabetic(city) && isAlphabetic(street)
+                && isNumeric(postal_code) && postal_code.length() == 10;
     }
 
     private String getUserSelectedUserName() {
         System.out.println("Choose user name:");
-        return scanner.next();
+        String userName = scanner.next();
+        if (isValidUserName(userName)) return userName;
+        throw new IllegalArgumentException("< You have entered invalid user name! >");
+    }
+
+    public boolean isValidUserName(String userName) {
+        return isAlphabetic(userName) && userName.length() < 16 && userName.length() > 4;
     }
 
     private String getUserSelectedPassword() {
         System.out.println("Choose password:");
-        return scanner.next();
+        String password = scanner.next();
+        if (isValidPassword(password)) return password;
+        throw new IllegalArgumentException("< You have entered invalid password! >");
+    }
+
+    public boolean isValidPassword(String password) {
+        return isAlphabeticOrNumeric(password) && password.length() < 8 && password.length() > 4;
+    }
+
+    private static boolean isNumeric(String number) {
+        return number.chars().allMatch(Character::isDigit);
+    }
+
+    private static boolean isAlphabetic(String name) {
+        return name.chars().allMatch(Character::isLetter);
+    }
+
+    private static boolean isAlphabeticOrNumeric(String name) {
+        return name.chars().allMatch(Character::isLetterOrDigit);
     }
 }

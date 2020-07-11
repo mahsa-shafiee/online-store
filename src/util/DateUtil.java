@@ -9,7 +9,7 @@ public class DateUtil {
 
     public static Date getCurrentDate() {
         long millis = System.currentTimeMillis();
-        return new java.sql.Date(millis);
+        return new Date(millis);
     }
 
     public static Time getCurrentTime() {
