@@ -19,5 +19,6 @@
     <orderEntry type="library" name="snakeyaml-1.21" level="project" />
     <orderEntry type="library" name="testng-7.1.0" level="project" />
     <orderEntry type="library" name="mockito-all-1.10.19" level="project" />
+    <orderEntry type="library" name="spring-5.2.7.RELEASE" level="project" />
   </component>
 </module>

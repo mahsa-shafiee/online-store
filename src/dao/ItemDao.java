@@ -4,17 +4,26 @@ import model.Item;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import util.HibernateUtil;
 
 import java.util.HashSet;
 import java.util.List;
 
+@Component
+@Lazy
 public class ItemDao {
+
+    @Autowired(required = false)
+    private HibernateUtil hibernateUtil;
+    @Autowired(required = false)
     private Session session;
 
     public void insert(Item item) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             session.save(item);
             transaction.commit();
@@ -27,7 +36,7 @@ public class ItemDao {
 
     public void delete(String name) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "DELETE FROM item WHERE name=:name";
             Query query = session.createQuery(hql).setParameter("name", name);
@@ -42,7 +51,7 @@ public class ItemDao {
 
     public HashSet<String> findAll() {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT name FROM item";
             List<String> itemList = session.createQuery(hql).list();
@@ -55,7 +64,7 @@ public class ItemDao {
 
     public Item[] showItemsOfCategory(int category_id) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "FROM item i where i.category.id=:category_id";
             Query query = session.createQuery(hql).setParameter("category_id", category_id);
@@ -69,7 +78,7 @@ public class ItemDao {
 
     public List<Item> search(int id) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT i,c.name FROM item i join category c on c.id=i.category where i.id=:id";
             Query query = session.createQuery(hql).setParameter("id", id);
@@ -83,7 +92,7 @@ public class ItemDao {
 
     public void setStock(int stock, Item item) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "UPDATE item SET stock =:stock WHERE id =:id";
             Query query = session.createQuery(hql).setParameter("stock", stock).setParameter("id", item.getId());
@@ -96,7 +105,7 @@ public class ItemDao {
 
     public int getIdIfExist(String name) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT id FROM item WHERE name=:name";
             Query query = session.createQuery(hql).setParameter("name", name);
@@ -105,13 +114,14 @@ public class ItemDao {
             session.close();
             return (int) id;
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return -1;
     }
 
     public int getStock(Item item) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT stock FROM item WHERE name=:name";
             Query query = session.createQuery(hql).setParameter("name", item.getName());

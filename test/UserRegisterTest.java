@@ -1,9 +1,13 @@
+import config.BeanConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import view.UserLoginMenu;
 
 public class UserRegisterTest {
-    private UserLoginMenu userLoginMenu = new UserLoginMenu();
+    private ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+    private UserLoginMenu userLoginMenu = applicationContext.getBean("userLoginMenu", UserLoginMenu.class);
 
     @Test
     public void isValidName() {
@@ -59,7 +63,7 @@ public class UserRegisterTest {
 
     @Test
     public void isValidPassword() {
-        Assert.assertFalse(userLoginMenu.isValidPassword("aa11"));
+        Assert.assertFalse(userLoginMenu.isValidPassword("aa1"));
         Assert.assertFalse(userLoginMenu.isValidPassword("aa11aa11"));
         Assert.assertFalse(userLoginMenu.isValidPassword("aa-11"));
         Assert.assertTrue(userLoginMenu.isValidPassword("11111"));

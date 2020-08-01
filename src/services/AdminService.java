@@ -2,23 +2,30 @@ package services;
 
 import dao.*;
 import model.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
-import java.sql.Date;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
+@Lazy
 public class AdminService {
 
-    AdminDao adminDao = new AdminDao();
-    CategoryDao categoryDao = new CategoryDao();
-    ItemDao itemDao = new ItemDao();
-    UserDao userDao = new UserDao();
-    OperationLogDao operationLogDao = new OperationLogDao();
+    @Autowired(required = false)
+    private AdminDao adminDao;
+    @Autowired(required = false)
+    private CategoryDao categoryDao;
+    @Autowired(required = false)
+    private ItemDao itemDao;
+    @Autowired(required = false)
+    private UserDao userDao;
+    @Autowired(required = false)
+    private OperationLogDao operationLogDao;
 
     public boolean validateAdmin(String userName, String password) {
-        System.out.println("Please wait...");
         Admin[] admins = adminDao.search(userName, password);
         for (Admin admin : admins) {
             if (admin != null) {
@@ -28,37 +35,36 @@ public class AdminService {
         return false;
     }
 
-    public void addCategory(Admin admin, String name) throws Exception {
+    public void addCategory(Admin admin, String name) {
         Category category = new Category(name, admin);
         admin.setId(adminDao.getIdIfExist(admin));
         categoryDao.insert(category);
     }
 
-    public HashSet<String> findAllCategory() throws Exception {
+    public HashSet<String> findAllCategory() {
         return categoryDao.findAll();
     }
 
-    public void renameCategory(String oldName, String newName) throws Exception {
+    public void renameCategory(String oldName, String newName) {
         categoryDao.rename(oldName, newName);
     }
 
-    public void deleteCategoryByName(String name) throws Exception {
+    public void deleteCategoryByName(String name) {
         categoryDao.delete(name);
     }
 
-    public void addProduct(Admin admin, Item item, String categoryName) throws Exception {
-        Category category = new Category(categoryDao.getIdIfExist(categoryName),
-                categoryName, admin);
+    public void addProduct(Admin admin, Item item, String categoryName) {
+        Category category = new Category(categoryDao.getIdIfExist(categoryName), categoryName, admin);
         item.setCategory(category);
         admin.setId(adminDao.getIdIfExist(admin));
         itemDao.insert(item);
     }
 
-    public HashSet<String> findAllItems() throws Exception {
+    public HashSet<String> findAllItems() {
         return itemDao.findAll();
     }
 
-    public void deleteItemByName(String name) throws Exception {
+    public void deleteItemByName(String name) {
         itemDao.delete(name);
     }
 
@@ -68,7 +74,7 @@ public class AdminService {
         return allUsers;
     }
 
-    public List<OperationLog> getOperationLogs(User user, String sinceDate) throws Exception {
+    public List<OperationLog> getOperationLogs(User user, String sinceDate) {
         List<OperationLog> operationLogs = operationLogDao.search(user, sinceDate);
         return operationLogs;
     }

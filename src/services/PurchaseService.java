@@ -5,33 +5,46 @@ import model.Item;
 import model.Order;
 import model.ShoppingCart;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import util.DateUtil;
 
 import java.util.HashSet;
 import java.util.List;
 
+@Component
+@Lazy
 public class PurchaseService {
-    private CategoryDao categoryDao = new CategoryDao();
-    private ShoppingCartDao shoppingCartDao = new ShoppingCartDao();
-    private OrderDao orderDao = new OrderDao();
-    private UserDao userDao = new UserDao();
-    private ItemDao itemDao = new ItemDao();
 
-    public HashSet<String> getAllCategories() throws Exception {
+    @Autowired(required = false)
+    private CategoryDao categoryDao;
+    @Autowired(required = false)
+    private ShoppingCartDao shoppingCartDao;
+    @Autowired(required = false)
+    private OrderDao orderDao;
+    @Autowired(required = false)
+    private UserDao userDao;
+    @Autowired(required = false)
+    private ItemDao itemDao;
+    @Autowired(required = false)
+    private DateUtil dateUtil;
+
+    public HashSet<String> getAllCategories() {
         HashSet<String> names = categoryDao.findAll();
         return names;
     }
 
-    public Item[] getProductsOfCategory(String categoryName) throws Exception {
-        Item[] itemsOfCategory = itemDao.showItemsOfCategory(categoryDao.getIdIfExist(categoryName));
-        return itemsOfCategory;
+    public Item[] getProductsOfCategory(String categoryName) {
+        int categoryId = categoryDao.getIdIfExist(categoryName);
+        return itemDao.showItemsOfCategory(categoryId);
     }
 
-    public boolean checkProductAvailability(Item product) throws Exception {
+    public boolean checkProductAvailability(Item product) {
         return itemDao.getStock(product) > 0;
     }
 
-    public List<Item> finalizeOrder(User user) throws Exception {
+    public List<Item> finalizeOrder(User user) {
         user.getShoppingCart().setId(shoppingCartDao.getIdIfExist(userDao.getIdIfExist(user)));
         List<Item> itemsToOrder = user.getShoppingCart().getItems();
         for (Item item : user.getShoppingCart().getItems()) {
@@ -40,7 +53,7 @@ public class PurchaseService {
                 System.out.println(item.getName() + " is not available.");
                 continue;
             }
-            Order order = new Order(DateUtil.getCurrentDate(), user, item);
+            Order order = new Order(dateUtil.getCurrentDate(), user, item);
             orderDao.insert(order);
         }
         for (Item item : user.getShoppingCart().getItems()) {
@@ -51,8 +64,8 @@ public class PurchaseService {
         return itemsToOrder;
     }
 
-    public List getOrders(User user) throws Exception {
-        List<Order> orders = orderDao.findOrdersOfUser(userDao.getIdIfExist(user));
-        return orders;
+    public List getOrders(User user) {
+        int userId = userDao.getIdIfExist(user);
+        return orderDao.findOrdersOfUser(userId);
     }
 }

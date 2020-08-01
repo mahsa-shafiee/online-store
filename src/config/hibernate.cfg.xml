@@ -23,7 +23,5 @@
         <mapping class="model.ShoppingCart"></mapping>
         <mapping class="model.Order"></mapping>
         <mapping class="model.OperationLog"></mapping>
-
-
     </session-factory>
 </hibernate-configuration>

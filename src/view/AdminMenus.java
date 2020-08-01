@@ -4,22 +4,35 @@ import model.Admin;
 import model.Item;
 import model.OperationLog;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import services.AdminService;
 import util.DateUtil;
 
+import java.sql.Time;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 
+@Component
+@Lazy
 public class AdminMenus {
-    private Scanner scanner = new Scanner(System.in);
-    private AdminService adminService = new AdminService();
 
-    public void showAdminMenu() throws Exception {
+    @Autowired(required = false)
+    private Scanner scanner;
+    @Autowired(required = false)
+    @Lazy
+    private AdminService adminService;
+    @Autowired(required = false)
+    private DateUtil dateUtil;
+
+    public void showAdminMenu() {
         while (true) {
             Admin admin = new Admin();
             String adminUserName = getAdminName();
             String adminPassword = getAdminPassword();
+            System.out.println("Please wait...");
             if (adminService.validateAdmin(adminUserName, adminPassword)) {
                 while (true) {
                     System.out.println(Main.GREEN_BOLD + "What do you want to do?" + Main.ANSI_RESET +
@@ -92,14 +105,14 @@ public class AdminMenus {
         return scanner.next();
     }
 
-    public void addCategory(Admin admin) throws Exception {
+    public void addCategory(Admin admin) {
         System.out.println("category name:");
         scanner.nextLine();
         String name = scanner.nextLine();
         adminService.addCategory(admin, name);
     }
 
-    public void renameExistingCategory() throws Exception {
+    public void renameExistingCategory() {
         showAllCategories();
         System.out.println("Enter in this way " + Main.BLACK_BOLD +
                 "old name,new name" + Main.ANSI_RESET + " to rename:");
@@ -113,7 +126,7 @@ public class AdminMenus {
         }
     }
 
-    public void deleteExistingCategory() throws Exception {
+    public void deleteExistingCategory() {
         showAllCategories();
         System.out.println("\nEnter name of the category you want to delete:");
         scanner.nextLine();
@@ -121,7 +134,7 @@ public class AdminMenus {
         adminService.deleteCategoryByName(name);
     }
 
-    public void addProduct(Admin admin) throws Exception {
+    public void addProduct(Admin admin) {
         showAllCategories();
         System.out.println("Enter the category of the product you want to add:");
         scanner.nextLine();
@@ -136,7 +149,7 @@ public class AdminMenus {
         adminService.addProduct(admin, item, categoryName);
     }
 
-    public void deleteExistingProduct() throws Exception {
+    public void deleteExistingProduct() {
         showAllItems();
         System.out.println("\nEnter the name of the product you want to delete:");
         scanner.nextLine();
@@ -144,14 +157,14 @@ public class AdminMenus {
         adminService.deleteItemByName(name);
     }
 
-    private void showAllCategories() throws Exception {
+    private void showAllCategories() {
         HashSet<String> allCategory = adminService.findAllCategory();
         for (String category : allCategory) {
             System.out.println(category);
         }
     }
 
-    private void showAllItems() throws Exception {
+    private void showAllItems() {
         HashSet<String> allItems = adminService.findAllItems();
         for (String item : allItems) {
             System.out.println(item);
@@ -167,7 +180,7 @@ public class AdminMenus {
         }
     }
 
-    private void showUserOperationLogsReport() throws Exception {
+    private void showUserOperationLogsReport() {
         User user = getUser();
         String dateStr = getSinceDate();
         List<OperationLog> operationLogs = adminService.getOperationLogs(user, dateStr);
@@ -177,9 +190,12 @@ public class AdminMenus {
 
         int logNumber = 1;
         for (OperationLog operationLog : operationLogs) {
+            Time operationTime = operationLog.getTime();
             System.out.println(logNumber + ")User with username '" + operationLog.getAuthority()
                     + "' performed an " + operationLog.getOperation()
-                    + " operation on " + operationLog.getDate() + " at " + operationLog.getTime());
+                    + " operation on " + operationLog.getDate() + " at " +
+                    new Time(operationTime.getHours() + 1, operationTime.getMinutes(),
+                            operationTime.getSeconds()));
             logNumber++;
         }
     }
@@ -189,7 +205,7 @@ public class AdminMenus {
         while (true) {
             try {
                 String dateStr = scanner.next();
-                DateUtil.convertStrToDate(dateStr);
+                dateUtil.convertStrToDate(dateStr);
                 return dateStr;
             } catch (Exception e) {
                 System.out.println("Invalid date!\nTry again...");

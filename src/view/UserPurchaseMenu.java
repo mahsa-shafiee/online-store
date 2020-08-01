@@ -3,6 +3,9 @@ package view;
 import model.Item;
 import model.Order;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import services.PurchaseService;
 import services.ShoppingCartManager;
 import services.UserService;
@@ -11,10 +14,18 @@ import util.OperationType;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Component
+@Lazy
 public class UserPurchaseMenu {
-    Scanner scanner = new Scanner(System.in);
-    private PurchaseService purchaseService = new PurchaseService();
-    private UserService userService = new UserService();
+
+    @Autowired(required = false)
+    private Scanner scanner;
+    @Autowired(required = false)
+    private PurchaseService purchaseService;
+    @Autowired(required = false)
+    private UserService userService;
+    @Autowired(required = false)
+    private ShoppingCartManager shoppingCartManager;
 
     public void showPurchaseMenu(User user) throws Exception {
         outer:
@@ -52,7 +63,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    public void displayCategoriesAndProducts(User user) throws Exception {
+    public void displayCategoriesAndProducts(User user) {
         String categoryName = displayAndGetCategoryName();
         if (categoryName == null)
             return;
@@ -78,7 +89,7 @@ public class UserPurchaseMenu {
 
         switch (answer) {
             case "Y":
-                if (!ShoppingCartManager.updateShoppingCart(user, selectedProduct)) {
+                if (!shoppingCartManager.updateShoppingCart(user, selectedProduct)) {
                     System.out.println(Main.ANSI_RED + "Sorry ,Your Cart is full\n" +
                             "You have to reduce the items or complete your purchase." + Main.ANSI_RESET);
                     break;
@@ -93,7 +104,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    public void displayAndManageShoppingCart(User user) throws Exception {
+    public void displayAndManageShoppingCart(User user) {
         String answer;
         if (!displayShoppingCart(user)) {
             OperationType.VIEW_CART.setItemsIds(new ArrayList<>());
@@ -124,7 +135,7 @@ public class UserPurchaseMenu {
             System.out.println(Main.ANSI_RED + "Invalid!" + Main.ANSI_RESET);
             return;
         }
-        int productId = ShoppingCartManager.deleteProductFromShoppingCart(answer);
+        int productId = shoppingCartManager.deleteProductFromShoppingCart(answer);
         if (productId == 0) {
             System.out.println(Main.ANSI_RED + "The information entered is incorrect!" + Main.ANSI_RESET);
         } else {
@@ -133,7 +144,7 @@ public class UserPurchaseMenu {
         }
     }
 
-    private String displayAndGetCategoryName() throws Exception {
+    private String displayAndGetCategoryName() {
         System.out.println("\nEnter the category you want:\n");
         HashSet<String> categoryNames = purchaseService.getAllCategories();
         for (String categoryName : categoryNames) {
@@ -148,7 +159,7 @@ public class UserPurchaseMenu {
         return categoryName;
     }
 
-    private int displayProductsOfCategory(String categoryName) throws Exception {
+    private int displayProductsOfCategory(String categoryName) {
         Item[] itemsOfCategory = purchaseService.getProductsOfCategory(categoryName);
         if (itemsOfCategory.length == 0) {
             System.out.println(Main.ANSI_RED + "This category is empty." + Main.ANSI_RESET);
@@ -184,7 +195,7 @@ public class UserPurchaseMenu {
     private boolean displayShoppingCart(User user) {
 
         user.setShoppingCart(null);
-        ShoppingCartManager.setItemsOfCart(user);
+        shoppingCartManager.setItemsOfCart(user);
         if (user.getShoppingCart() == null || user.getShoppingCart().getItems() == null || user.getShoppingCart().getItems().size() == 0) {
             System.out.println(Main.BLACK_BOLD + "Your shopping Cart is empty :(" + Main.ANSI_RESET);
             return false;
@@ -216,7 +227,7 @@ public class UserPurchaseMenu {
 
     }
 
-    private void displayOrders(User user) throws Exception {
+    private void displayOrders(User user) {
         List<Order> orders = purchaseService.getOrders(user);
         int number = 1;
         for (Order order : orders) {

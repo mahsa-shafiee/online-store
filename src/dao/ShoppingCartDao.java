@@ -6,16 +6,25 @@ import model.User;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import util.HibernateUtil;
 
 import java.util.List;
 
+@Component
+@Lazy
 public class ShoppingCartDao {
+
+    @Autowired(required = false)
     private Session session;
+    @Autowired(required = false)
+    private HibernateUtil hibernateUtil;
 
     public void insert(ShoppingCart shoppingCart) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
@@ -27,7 +36,7 @@ public class ShoppingCartDao {
 
     public List<Item> findItems(User user) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT item FROM shopping_cart where users_id=:users_id";
             Query query = session.createQuery(hql).setParameter("users_id", user.getId());
@@ -41,7 +50,7 @@ public class ShoppingCartDao {
 
     public void deleteRow(int item_id) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "select id FROM shopping_cart WHERE item.id=:item_id";
             Query query = session.createQuery(hql).setParameter("item_id", item_id).setMaxResults(1);
@@ -55,7 +64,7 @@ public class ShoppingCartDao {
 
     public void deleteCartOfUser(int user_id) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "DELETE FROM shopping_cart WHERE users_id=:users_id";
             Query query = session.createQuery(hql).setParameter("users_id", user_id);
@@ -68,7 +77,7 @@ public class ShoppingCartDao {
 
     public int getIdIfExist(int user_id) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String sql = "SELECT c.* FROM shopping_cart c WHERE c.users_id= ?";
             Query query = session.createNativeQuery(sql, ShoppingCart.class).setParameter(1, user_id);

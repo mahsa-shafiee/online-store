@@ -20,35 +20,50 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0367dddf-8e23-4f5c-936d-533e349e2149" name="Default" comment="add test to validate user input when registering">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/aopalliance_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/guava_19_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/guice_4_1_0_no_aop.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/javax_inject_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/jcommander_1_72.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_151.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mockito_all_1_10_19.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_19.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/snakeyaml_1_21.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/testng_7_1_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/config/hibernate.cfg.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/dao/OperationLogDao.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/log4j.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/model/OperationLog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/util/DateUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/util/HibernateUtil.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/online-store/util/OperationType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/test/online-store/UserRegisterTest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/UserRegisterTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/hibernate_release_5_4.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/hibernate_release_5_4.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/log4j_1_2_15.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_8_0_19.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/online-store.iml" beforeDir="false" afterPath="$PROJECT_DIR$/online-store.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/config/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/config/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/AddressDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/AddressDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/AdminDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/AdminDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/CategoryDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/CategoryDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/ItemDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/ItemDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/OperationLogDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/OperationLogDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/OrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/OrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/ShoppingCartDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/ShoppingCartDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/dao/UserDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/dao/UserDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/model/OperationLog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/model/OperationLog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/services/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/services/AdminService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/services/PurchaseService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/services/PurchaseService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/services/ShoppingCartManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/services/ShoppingCartManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/services/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/services/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/util/DateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/util/DateUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/util/HibernateUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/util/HibernateUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/view/AdminMenus.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/view/AdminMenus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/view/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/view/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/online-store/view/UserLoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/view/UserLoginMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/online-store/view/UserPurchaseMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/online-store/view/UserPurchaseMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/online-store/UserRegisterTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/online-store/UserRegisterTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/hibernate.cfg.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AddressDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AddressDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/AdminDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/AdminDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/CategoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/CategoryDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ItemDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/OperationLogDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/OperationLogDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/OrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/OrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/ShoppingCartDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/OperationLog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/OperationLog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PurchaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PurchaseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/ShoppingCartManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/ShoppingCartManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/util/DateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/HibernateUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/HibernateUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/AdminMenus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/AdminMenus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/UserLoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/UserLoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/UserPurchaseMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/UserPurchaseMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UserRegisterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UserRegisterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,50 +78,14 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>Enter the category you want:</find>
-      <find>Y</find>
-      <find>enter Y</find>
-      <find>Registra</find>
-      <find>sign</find>
-      <find>inn</find>
-      <find>outer</find>
-      <find>exit</find>
-      <find>getId</find>
-      <find>split</find>
-      <find>5</find>
-      <find>setItemsO</find>
-      <find>updateshopp</find>
-      <find>setitemsof</find>
-      <find>Exi</find>
-      <find>upda</find>
-      <find>empty</find>
-      <find>cart</find>
-      <find>dao</find>
-      <find>userService</find>
-      <find>order</find>
-      <find>pars</find>
-      <find>from</find>
-      <find>From</find>
-      <find>recordNe</find>
-      <find>userSer</find>
-      <find>record</find>
-      <find>rec</find>
-      <find>CART</find>
-      <find>HibernateException</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>Exception</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="developer" />
       </map>
     </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectId" id="1dzT3vAT882AYd7adTi1bmwLpNC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -117,6 +96,10 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SearchEverywhereHistoryKey" value="manage l&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;mana&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;manage li&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;license&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;licen&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;manage lice&#9;ACTION&#9;WelcomScreen.ManageLicense&#10;updateShopp&#9;PSI&#9;JAVA://services.ShoppingCartManager#updateShoppingCart&#10;search&#9;PSI&#9;JAVA://dao.ItemDao#search&#10;setItemsOf&#9;PSI&#9;JAVA://dao.ShoppingCartDao#setItemsOfCart&#10;stock&#9;PSI&#9;JAVA://dto.Item#stock" />
@@ -126,10 +109,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Perforce" />
   </component>
   <component name="RecentsManager">
     <key name="OPEN_URL_DIALOG">
@@ -148,7 +132,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.UserRegisterTest.isValidName">
+  <component name="RunManager" selected="TestNG.UserRegisterTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.Main" />
       <module name="online-store" />
@@ -206,9 +190,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.UserRegisterTest.isValidName" />
         <item itemvalue="TestNG.UserRegisterTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="TestNG.UserRegisterTest.isValidName" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -312,7 +296,16 @@
       <workItem from="1594390941064" duration="246000" />
       <workItem from="1594401951291" duration="927000" />
       <workItem from="1594445327567" duration="189000" />
-      <workItem from="1594445672999" duration="818000" />
+      <workItem from="1594445672999" duration="1759000" />
+      <workItem from="1594654294700" duration="4519000" />
+      <workItem from="1594712375400" duration="15000" />
+      <workItem from="1594712474305" duration="13058000" />
+      <workItem from="1594748252917" duration="4806000" />
+      <workItem from="1594832641260" duration="2136000" />
+      <workItem from="1595103880854" duration="20000" />
+      <workItem from="1595586201166" duration="691000" />
+      <workItem from="1596262420301" duration="50000" />
+      <workItem from="1596282683514" duration="648000" />
     </task>
     <task id="LOCAL-00001" summary="Rewrote codes due to use of hibernate">
       <created>1591359809631</created>
@@ -335,7 +328,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591360232606</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add test to validate user input when registering">
+      <created>1594446889397</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1594446889397</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -349,6 +349,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -374,35 +384,55 @@
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="104" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.800@0.0.1280.800" timestamp="1593428908571" />
-    <state width="1280" height="262" key="GridCell.Tab.0.bottom" timestamp="1594446023140">
+    <state width="1280" height="278" key="GridCell.Tab.0.bottom" timestamp="1595592400517">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1280" height="262" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1594446023140" />
-    <state width="1280" height="262" key="GridCell.Tab.0.center" timestamp="1594446023137">
+    <state width="1280" height="278" key="GridCell.Tab.0.bottom/0.0.1280.800@0.0.1280.800" timestamp="1595592400517" />
+    <state width="1280" height="278" key="GridCell.Tab.0.center" timestamp="1595592400514">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1280" height="262" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1594446023137" />
-    <state width="1280" height="262" key="GridCell.Tab.0.left" timestamp="1594446023135">
+    <state width="1280" height="278" key="GridCell.Tab.0.center/0.0.1280.800@0.0.1280.800" timestamp="1595592400514" />
+    <state width="1280" height="278" key="GridCell.Tab.0.left" timestamp="1595592400513">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1280" height="262" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1594446023135" />
-    <state width="1280" height="262" key="GridCell.Tab.0.right" timestamp="1594446023139">
+    <state width="1280" height="278" key="GridCell.Tab.0.left/0.0.1280.800@0.0.1280.800" timestamp="1595592400513" />
+    <state width="1280" height="278" key="GridCell.Tab.0.right" timestamp="1595592400515">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state width="1280" height="262" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1594446023139" />
-    <state x="128" y="0" key="SettingsEditor" timestamp="1594446818170">
+    <state width="1280" height="278" key="GridCell.Tab.0.right/0.0.1280.800@0.0.1280.800" timestamp="1595592400515" />
+    <state x="128" y="0" key="SettingsEditor" timestamp="1594752546739">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="128" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1594446818170" />
+    <state x="128" y="0" key="SettingsEditor/0.0.1280.800@0.0.1280.800" timestamp="1594752546739" />
+    <state x="240" y="140" key="Vcs.Push.Dialog.v2" timestamp="1594446896047">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="240" y="140" key="Vcs.Push.Dialog.v2/0.0.1280.800@0.0.1280.800" timestamp="1594446896047" />
+    <state x="100" y="100" width="1080" height="600" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1594448263048">
+      <screen x="0" y="23" width="1280" height="777" />
+    </state>
+    <state x="100" y="100" width="1080" height="600" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1280.777@0.23.1280.777" timestamp="1594448263048" />
     <state x="317" y="228" key="com.intellij.ide.util.TipDialog" timestamp="1593428439097">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
     <state x="317" y="228" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1593428439097" />
     <state x="317" y="244" key="com.intellij.ide.util.TipDialog/0.23.1280.777@0.23.1280.777" timestamp="1593426743939" />
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1593428746096">
+    <state x="337" y="299" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1594727655514">
       <screen x="0" y="0" width="1280" height="800" />
     </state>
-    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1593428746096" />
+    <state x="337" y="299" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1280.800@0.0.1280.800" timestamp="1594727655514" />
+    <state x="378" y="145" key="extract.method.dialog" timestamp="1594672258736">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="378" y="145" key="extract.method.dialog/0.0.1280.800@0.0.1280.800" timestamp="1594672258736" />
+    <state x="305" y="185" width="670" height="675" key="run.anything.popup" timestamp="1594833014514">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="185" width="670" height="675" key="run.anything.popup/0.0.1280.800@0.0.1280.800" timestamp="1594833014514" />
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup" timestamp="1594834521876">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="305" y="124" width="670" height="676" key="search.everywhere.popup/0.0.1280.800@0.0.1280.800" timestamp="1594834521876" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

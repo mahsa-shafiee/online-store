@@ -2,15 +2,26 @@ package view;
 
 import model.Address;
 import model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import services.UserService;
 import util.OperationType;
 
 import java.util.Scanner;
 
+@Component
+@Lazy
 public class UserLoginMenu {
-    Scanner scanner = new Scanner(System.in);
-    private UserService userService = new UserService();
-    private UserPurchaseMenu userPurchaseMenu = new UserPurchaseMenu();
+
+    @Autowired(required = false)
+    private Scanner scanner;
+    @Autowired(required = false)
+    @Lazy
+    private UserService userService;
+    @Autowired(required = false)
+    @Lazy
+    private UserPurchaseMenu userPurchaseMenu;
 
     public void showUserMenu() throws Exception {
         outer:
@@ -53,6 +64,7 @@ public class UserLoginMenu {
         System.out.println(Main.BLACK_BOLD + "Account Login:" + Main.ANSI_RESET);
         String userName = getUserName();
         String userPassword = getUserPassword();
+        System.out.println("Please wait...");
         User user = userService.validateUser(userName, userPassword);
         if (user != null) {
             System.out.println("Hi " + Main.ANSI_YELLOW + user.getFirstName() + Main.ANSI_RESET + "!");
@@ -74,6 +86,7 @@ public class UserLoginMenu {
         String userName = getUserSelectedUserName();
         String password = getUserSelectedPassword();
         User user = new User(userName, password, firstName, lastName, age, mobileNumber, emailAddress, homeAddress);
+        System.out.println("Please wait...");
         userService.registerNewUser(user, homeAddress);
         userService.recordNewLog(OperationType.REGISTER, user.getUserName());
         userPurchaseMenu.showPurchaseMenu(user);
@@ -94,7 +107,7 @@ public class UserLoginMenu {
         String firstName = scanner.next();
         if (isValidName(firstName))
             return firstName;
-        throw new IllegalArgumentException("< You have entered invalid last name! >");
+        throw new IllegalArgumentException("< You have entered invalid first name! >");
     }
 
     private String getUserLastName() {
@@ -177,7 +190,7 @@ public class UserLoginMenu {
     }
 
     public boolean isValidPassword(String password) {
-        return isAlphabeticOrNumeric(password) && password.length() < 8 && password.length() > 4;
+        return isAlphabeticOrNumeric(password) && password.length() < 8 && password.length() > 3;
     }
 
     private static boolean isNumeric(String number) {

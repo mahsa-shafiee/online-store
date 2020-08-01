@@ -1,5 +1,9 @@
 package view;
 
+import config.BeanConfiguration;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import java.util.Scanner;
 
 public class Main {
@@ -12,15 +16,18 @@ public class Main {
     public static boolean EXIT = false;
     public static boolean SIGN_OUT = false;
 
+    private static ApplicationContext applicationContext = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
     public static void main(String[] args) {
-        UserLoginMenu userLoginMenu = new UserLoginMenu();
-        AdminMenus adminMenus = new AdminMenus();
+
+        UserLoginMenu userLoginMenu = applicationContext.getBean("userLoginMenu", UserLoginMenu.class);
+        AdminMenus adminMenus = applicationContext.getBean("adminMenus", AdminMenus.class);
+        Scanner scanner = applicationContext.getBean("scanner", Scanner.class);
 
         while (true) {
             try {
                 System.out.println(BLUE_BOLD + "****Hi, Welcome To Online Store****\n" + ANSI_RESET +
                         "Choose your role:\n1)User 2)Admin");
-                Scanner scanner = new Scanner(System.in);
                 int role = scanner.nextInt();
                 switch (role) {
                     case 1:

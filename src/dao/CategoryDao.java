@@ -4,17 +4,26 @@ import model.Category;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 import util.HibernateUtil;
 
 import java.util.HashSet;
 import java.util.List;
 
+@Component
+@Lazy
 public class CategoryDao {
+
+    @Autowired(required = false)
     private Session session;
+    @Autowired(required = false)
+    private HibernateUtil hibernateUtil;
 
     public void insert(Category category) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             session.save(category);
             transaction.commit();
@@ -27,7 +36,7 @@ public class CategoryDao {
 
     public HashSet<String> findAll() {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT name FROM category";
             List<String> categoryNameList = session.createQuery(hql).list();
@@ -40,7 +49,7 @@ public class CategoryDao {
 
     public void rename(String oldName, String newName) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "UPDATE category SET name=:newName WHERE name=:oldName";
             Query query = session.createQuery(hql)
@@ -55,7 +64,7 @@ public class CategoryDao {
 
     public void delete(String name) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "DELETE FROM category WHERE name=:name";
             Query query = session.createQuery(hql).setParameter("name", name);
@@ -68,7 +77,7 @@ public class CategoryDao {
 
     public int getIdIfExist(String name) {
         try {
-            session = HibernateUtil.getSession();
+            session = hibernateUtil.getSession();
             Transaction transaction = session.beginTransaction();
             String hql = "SELECT id FROM category WHERE name=:name";
             Query query = session.createQuery(hql).setParameter("name", name);

@@ -3,25 +3,28 @@ package util;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
+@Component
+@Lazy
 public class HibernateUtil {
 
-    private static SessionFactory sessionFactory = null;
+    @Autowired
+    private SessionFactory sessionFactory;
 
-    static {
+    public SessionFactory buildSessionFactory() {
         try {
-            buildSessionFactory();
+            return new Configuration().configure("config/hibernate.cfg.xml").buildSessionFactory();
         } catch (Exception e) {
             System.out.println("Exception while creating sessionFactory obj... ");
             e.printStackTrace();
         }
+        return null;
     }
 
-    public static void buildSessionFactory() {
-        sessionFactory = new Configuration().configure("config/hibernate.cfg.xml").buildSessionFactory();
-    }
-
-    public static Session getSession() {
+    public Session getSession() {
         Session retSession = null;
         try {
             retSession = sessionFactory.getCurrentSession();

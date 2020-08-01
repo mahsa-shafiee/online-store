@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
-@Entity(name = "operationLog")
+@Entity(name = "operationlog")
 public class OperationLog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
